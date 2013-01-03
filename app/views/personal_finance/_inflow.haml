@@ -1,0 +1,23 @@
+- i ||= 0
+= link_to "Add Inflow", polymorphic_path([:new_finance_inflow]) 
+%table{ :class => 'table  table-striped' }
+  %tr{ :class=> "tr-head"}
+    %th S.no
+    %th Amount
+    %th Debited from
+    %th Income type
+    %th Created at
+
+  - i = 0
+  -for fi in @finance_inflows
+    %tr
+      %td 
+        = i = i.next
+      %td 
+        = 'Rs. ' + fi.amount
+      %td
+        = fi.debited_from
+      %td
+        = fi.income_type
+      %td
+        = fi.created_at.strftime("%d-%m-%Y")

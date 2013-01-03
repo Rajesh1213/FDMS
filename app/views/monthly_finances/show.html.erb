@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Customer:</b>
+  <%= @monthly_finance.customer_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @monthly_finance.user_id %>
+</p>
+
+<p>
+  <b>Loan name:</b>
+  <%= @monthly_finance.loan_name %>
+</p>
+
+<p>
+  <b>Date of issue:</b>
+  <%= @monthly_finance.date_of_issue %>
+</p>
+
+<p>
+  <b>Payment months:</b>
+  <%= @monthly_finance.payment_months %>
+</p>
+
+<p>
+  <b>Agreement date:</b>
+  <%= @monthly_finance.agreement_date %>
+</p>
+
+<p>
+  <b>Due date:</b>
+  <%= @monthly_finance.due_date %>
+</p>
+
+<p>
+  <b>Interest percent:</b>
+  <%= @monthly_finance.interest_percent %>
+</p>
+
+<p>
+  <b>Amount recieved:</b>
+  <%= @monthly_finance.amount_recieved %>
+</p>
+
+<p>
+  <b>Main balance:</b>
+  <%= @monthly_finance.main_balance %>
+</p>
+
+<p>
+  <b>Cleared balance:</b>
+  <%= @monthly_finance.cleared_balance %>
+</p>
+
+<p>
+  <b>Loan status:</b>
+  <%= @monthly_finance.loan_status %>
+</p>
+
+
+<%= link_to 'Edit', edit_monthly_finance_path(@monthly_finance) %> |
+<%= link_to 'Back', monthly_finances_path %>

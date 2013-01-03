@@ -1,0 +1,50 @@
+
+<div id="content-header">
+  <%= image_tag 'home.png' %>	
+  <h1> Welcome </h1>
+  <h3> Rental Management System </h3>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'New Tenant', new_rent_path %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+    <div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+
+    <div class="label-field-pair">
+    <label> Search Customer <span class="necessary-field">*</span> </label>
+    
+    <%= image_tag("loader.gif",
+      :align => "absmiddle",
+      :border => 0,
+      :id => "loader",
+      :style =>"display: none; float :right;" ) %>
+          
+      <div class="text-input-bg"><%= text_field_tag "query", params[:query], :autocomplete => 'off', :placeholder =>"Search" %></div>
+            
+      <div id="page-yield">
+        <%= observe_field 'query', :frequency => 1.0,
+          :update => 'user_information',
+          :url => {:action => 'search_properties' },
+          :before => "Element.show('loader')",
+          :success => "Element.hide('loader')",
+          :with => 'query' %>
+      </div>
+    <div id="account_id" style="display:none;"></div>  
+   
+  </div>
+   
+    <div id="user_info"> </div>
+    <div id="modal-box" style="display:none;"></div>
+  </div>
+
+<div id="rents"></div>
+  </div>
+</div>

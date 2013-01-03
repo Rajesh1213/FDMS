@@ -1,0 +1,37 @@
+<h1>Listing dailyinterests</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Customer</th>
+    <th>Loan amount</th>
+    <th>Interest per day</th>
+    <th>Date of issue</th>
+    <th>Due closing date</th>
+    <th>Total interest</th>
+    <th>Tatal paid</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @dailyinterests.each do |dailyinterest| %>
+  <tr>
+    <td><%= dailyinterest.user_id %></td>
+    <td><%= dailyinterest.customer_id %></td>
+    <td><%= dailyinterest.loan_amount %></td>
+    <td><%= dailyinterest.interest_per_day %></td>
+    <td><%= dailyinterest.date_of_issue %></td>
+    <td><%= dailyinterest.due_closing_date %></td>
+    <td><%= dailyinterest.total_interest %></td>
+    <td><%= dailyinterest.tatal_paid %></td>
+    <td><%= link_to 'Show', dailyinterest %></td>
+    <td><%= link_to 'Edit', edit_dailyinterest_path(dailyinterest) %></td>
+    <td><%= link_to 'Destroy', dailyinterest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Dailyinterest', new_dailyinterest_path %>

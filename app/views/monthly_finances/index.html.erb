@@ -1,0 +1,45 @@
+<h1>Listing monthly_finances</h1>
+
+<table>
+  <tr>
+    <th>Customer</th>
+    <th>User</th>
+    <th>Loan name</th>
+    <th>Date of issue</th>
+    <th>Payment months</th>
+    <th>Agreement date</th>
+    <th>Due date</th>
+    <th>Interest percent</th>
+    <th>Amount recieved</th>
+    <th>Main balance</th>
+    <th>Cleared balance</th>
+    <th>Loan status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @monthly_finances.each do |monthly_finance| %>
+  <tr>
+    <td><%= monthly_finance.customer_id %></td>
+    <td><%= monthly_finance.user_id %></td>
+    <td><%= monthly_finance.loan_name %></td>
+    <td><%= monthly_finance.date_of_issue %></td>
+    <td><%= monthly_finance.payment_months %></td>
+    <td><%= monthly_finance.agreement_date %></td>
+    <td><%= monthly_finance.due_date %></td>
+    <td><%= monthly_finance.interest_percent %></td>
+    <td><%= monthly_finance.amount_recieved %></td>
+    <td><%= monthly_finance.main_balance %></td>
+    <td><%= monthly_finance.cleared_balance %></td>
+    <td><%= monthly_finance.loan_status %></td>
+    <td><%= link_to 'Show', monthly_finance %></td>
+    <td><%= link_to 'Edit', edit_monthly_finance_path(monthly_finance) %></td>
+    <td><%= link_to 'Destroy', monthly_finance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Monthly finance', new_monthly_finance_path %>

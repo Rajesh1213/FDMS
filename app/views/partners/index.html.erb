@@ -1,0 +1,48 @@
+<style>
+.table td, .table tr { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;}
+</style>
+<div id="content-header">
+  <%= image_tag('users-icon.jpeg') %>
+  <h1> Partners </h1>
+  <h3> Listing Partners </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'New Partner', new_partner_path %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <br/>
+  <div class="box">
+
+<table class="table  table-striped table-hover table-bordered">
+  <tr>
+    <th>Partner Name</th>
+    <th>M Director</th>
+    <th>Phone1</th>
+    <th>Email</th>
+    <th></th>
+  </tr>
+
+<% @partners.each do |partner| %>
+  <tr>
+    <td><%= partner.unique_id %> - <%= partner.first_name %> <%= partner.last_name %></td>
+    <td><%= link_to ( partner.m_director.unique_id+' '+partner.m_director.first_name+' '+partner.m_director.last_name ), :controller => "m_directors",:action => "show",  :id => partner.m_director.id   %></td>
+    <td><%= partner.phone1 %></td>
+    <td><%= partner.email %></td>
+    <td><%= link_to 'Show', partner %> |
+    <%= link_to 'Edit', edit_partner_path(partner) %> |
+    <%= link_to 'Destroy', partner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+</div>
+</div>
+

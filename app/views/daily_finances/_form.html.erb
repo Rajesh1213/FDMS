@@ -1,0 +1,118 @@
+<script>
+$jq = jQuery.noConflict();
+   $jq(document).ready(function() {
+    $jq('#daily_finance_interest_percent').keyup(function() {
+
+      $jq('#daily_finance_amount_recieved').val( 
+           ($jq('#daily_finance_loan_amount').val() - 
+            
+            ( ($jq('#daily_finance_loan_amount').val() *
+              $jq('#daily_finance_interest_percent').val())/100)
+
+           )
+        );
+      $jq('#daily_finance_main_balance').val($jq('#daily_finance_loan_amount').val())
+      $jq('#daily_finance_cleared_balance').val('0')
+
+    });
+  });
+</script>
+
+<%= form_for(@daily_finance) do |f| %>
+  <% if @daily_finance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@daily_finance.errors.count, "error") %> prohibited this daily_finance from being saved:</h2>
+
+      <ul>
+      <% @daily_finance.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+   
+   <% unless @customer.nil? or @customer.blank? %>
+   <div class="customer_details" style="margin-bottom: 60px;">
+     <div class="label-field-pair">
+       <label><%= image_tag @customer.image_url.to_s, :size => '75x75' %></label>
+      <label> <%= @customer.first_name %> <%= @customer.middle_name %> <%= @customer.last_name %>
+        <br/> Phone: <%= @customer.phone1 %> , <%= @customer.phone2 %>  
+      </label>
+  </div>
+   </div>
+   <% end %>
+
+
+  <div class="label-field-pair">
+    <label> Customer Acc No. </label>
+    <% if @customer.nil? %>
+     <%= image_tag("loader.gif",
+      :align => "absmiddle",
+      :border => 0,
+      :id => "loader",
+      :style =>"display: none; float :right;" ) %>
+          
+      <div class="text-input-bg"><%= text_field_tag "query", params[:query], :autocomplete => 'off', :placeholder =>"Enter Account Number" %></div>
+            
+      <div id="page-yield">
+        <%= observe_field 'query', :frequency => 1.0,
+          :update => 'user_information',
+          :url => { :action => 'search_customer' },
+          :before => "Element.show('loader')",
+          :success => "Element.hide('loader')",
+          :with => 'query' %>
+      </div>
+    <div id="account_id" style="display:none;"></div> 
+    <% else %>
+    <%= f.text_field :customer_id , :value => @customer.account_number %>
+    <% end %>
+  </div>
+  
+  <div id="account_info"></div>
+
+  <div class="label-field-pair">
+    <%= f.label :loan_name %>
+    <%= f.text_field :loan_name, :value => @dfinance_name %>
+  </div>
+  
+  <div class="label-field-pair">
+    <%= f.label :loan_amount %>
+    <%= f.text_field :loan_amount %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :date_of_issue %>
+    <%= f.calendar_date_select :date_of_issue , :value => Date.today.to_date %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :payment_days %>
+    <%= f.text_field :payment_days %>
+  </div>
+  
+  <div class="label-field-pair">
+    <%= f.label :due_date %>
+    <%= f.calendar_date_select :due_date %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :interest_percent %>
+    <%= f.text_field :interest_percent %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :amount_recieved %> 
+    <%= f.text_field :amount_recieved %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :main_balance %>
+    <%= f.text_field :main_balance %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :cleared_balance %>
+    <%= f.text_field :cleared_balance %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :loan_status %>
+    <%= f.text_field :loan_status %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create", :class=> "submit-button"  %>
+  </div>
+<% end %>

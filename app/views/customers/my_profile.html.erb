@@ -1,0 +1,115 @@
+<style>
+.box{
+    width: 600px;
+    margin: 0px auto;
+}
+.collection-info{
+  margin: 5px;
+  padding: 5px;
+  width: 550px;
+  border-bottom: 1px solid #ccc;
+}
+.collection-info h3{
+ padding: 3px;
+ color: #333;
+}
+h4{
+  text-align: center;
+  font-size: 18px;
+  padding: 5px;
+  color: #fff;
+  background: #aaa;
+  border: 1px solid #a8a8a8;
+}
+ 
+ ul li{
+  list-style: none;
+  padding: 5px;
+  background: #e5e5e5;
+  margin: 3px 0px 3px 0px ;
+  border: 1px solid #ccc;
+ } 
+ ul li:hover{
+  background: #d8d8d8;
+ }
+
+ li label {
+  font-size: 12px;
+  font-style: italic;
+  float:right;
+ }
+
+</style>
+<div id="content-header">
+  <%= image_tag 'home.png' %>	
+  <h1> My Profile </h1>
+  <h3> <%= @user.email %> </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+
+<h4> Total collections Today : Rs <%= number_to_currency(@total_amount_today, :unit => " ") %> </h4>
+
+ 
+<div class="collection-info">
+ <h3> (<%= @daily_finance.count %>) Daily Finance Collection Details: </h3>
+   <br/><label> Details: </label>
+   <ul>
+    <% i = 0 %>
+    <% @daily_finance.each do |dailyfinance| %>
+    <li> <%= i = i.next %>. <%= dailyfinance.daily_finance.loan_name %> - Rs. <%= number_to_currency(dailyfinance.amount, :unit => " ") %>
+      
+      <label>from A/c: <%= link_to dailyfinance.daily_finance.customer.account_number, {:action =>"customers", :action => "show", :id => dailyfinance.daily_finance.customer.id}, :target => "blank" %> </label>
+    </li>
+    <% end%>
+   </ul>
+</div> 
+
+<div class="collection-info">
+ <h3> (<%= @monthly_finance.count %>) Monthly Finance Collection Details </h3>
+   <br/><label> Details: </label>
+   <ul>
+    <% i = 0 %>
+    <% @monthly_finance.each do |monthlyfinance| %>
+    <li> <%= i = i.next %>. <%= monthlyfinance.monthly_finance.loan_name %> - Rs. <%= number_to_currency(monthlyfinance.amount, :unit => " ")  %>
+      
+      <label>from A/c: <%= link_to monthlyfinance.monthly_finance.customer.account_number ,{:action =>"customers", :action => "show", :id => monthlyfinance.monthly_finance.customer.id}, :target => "blank" %> </label>
+    </li>
+    <% end%>
+   </ul>
+</div> 
+
+<div class="collection-info">
+ <h3> (<%= @dailyinterest.count %>) Daily Interest Collection Details </h3>
+   <br/><label> Details: </label>
+   <ul>
+    <% i = 0 %>
+    <% @dailyinterest.each do |dailyinterest| %>
+    <li> <%= i = i.next %>. <%= dailyinterest.dailyinterest.loan_name %> - Rs. <%= number_to_currency(dailyinterest.amount, :unit => " ") %>
+    
+     <label>from A/c: <%= link_to dailyinterest.dailyinterest.customer.account_number,{:action =>"customers", :action => "show", :id => dailyinterest.dailyinterest.customer.id}, :target => "blank" %> </label>
+    </li>
+    <% end%>
+   </ul> 
+</div> 
+
+<div class="collection-info">
+ <h3> (<%= @monthly_interest.count %>) Daily Interest Collection Details </h3>
+   <br/><label> Details: </label>
+   <ul>
+    <% i = 0 %>
+    <% @monthly_interest.each do |monthlyinterest| %>
+    <li> <%= i = i.next %>. <%= monthlyinterest.monthly_interest.loan_name %> - Rs. <%= number_to_currency(monthlyinterest.amount, :unit => " ") %>
+      <label>from A/c: <%= link_to monthlyinterest.monthly_interest.customer.account_number, {:action =>"customers", :action => "show", :id => monthlyinterest.monthly_interest.customer.id}, :target => "blank" %> </label>
+    </li>
+    <% end%>
+   </ul>
+</div> 
+
+</div>
+</div>

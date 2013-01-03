@@ -1,0 +1,39 @@
+<style>
+.user-details{
+	padding: 5px;
+	margin: 5px;
+	border: 2px solid #ccc;
+	font-size: 14px;
+	background-color: #e5e5e5;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;;
+}
+li{
+	padding: 3px;
+	margin: 3px;
+}
+</style>
+
+<% @rents. each do |rent| %>
+<div class="user-details">
+<ul style="list-style:none;" class ="user_info_ul" >
+      <li><strong>Tenant Name : </strong> <span style="color: brown"><%= rent.tenant_name %> </span> <span style="float:right;"> --> <%= link_to('Full Details', :controller => "rents", :action => "full_details", :id => rent.id ) %> </span> </li> 
+      <li><strong>Address: </strong> <%=rent.permanent_address %> </li>
+      <li><strong>Mobile: </strong> <%=rent.mobile%> </li>
+      <li><strong>Rented Property: </strong> <%=rent.add_property.house_number%> </li>
+      <li><strong>Area: </strong> <%=rent.add_property.area%> </li>
+      <li><strong>Street Address: </strong> <%=rent.add_property.street_address%> </li>
+    </ul>
+    <ul style="list-style:none;" class ="rt_user_info_ul" >
+      <li><strong>Contract Signed Date : </strong> <%= rent.signed_contract_date.strftime("%d-%m-%Y") %> </li> 
+      <li><strong>Contract Reneval Date: </strong> <%=rent.reneval_contract_date.strftime("%d-%m-%Y") %> </li>
+      <li><strong>Advance Taken: </strong> Rs. <%=rent.advance_taken%> </li>
+    </ul>
+</div>
+<div class="clearfix"> </div>
+<% end %> 
+

@@ -1,0 +1,49 @@
+<div id="login" class="centerbox">
+
+
+  <div id="login_area_bg">
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div id="login_area">
+        <% if !flash.empty? %>
+            <div id="notice"><%= flash[:notice] %></div>
+        <% end %>
+
+         <div class="login heading" style="text-align: center" >
+            <h2>Financial Data Management System</h2>  
+            <h2>Sign in</h2>
+         </div>
+
+            <div id="username_textbox_bg">
+              <%= f.email_field :email, :maxlength => 40, :size => 20, :placeholder =>'username' %>
+            </div>
+
+            <div id="password_textbox_bg">
+              <%= f.password_field :password ,:size =>20, :placeholder => "password"%>
+            </div>
+
+            
+            <br/>
+            <div id="submit_area">
+              <%= f.submit "Sign in", :class => "submit" %>
+            </div>
+
+            <div id="help_forgot_pw" >
+    
+            </div>
+
+        </div>
+  <% end %>
+ </div>
+<!-- 
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :placeholder => 'Username' %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password , :placeholder => 'Password' %></div>
+
+  <div><%= f.submit "Sign in" %></div>
+<% end %> -->
+
+
+</div>

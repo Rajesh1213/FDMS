@@ -1,0 +1,27 @@
+<style type="text/css">
+.cust-search-info{
+	padding:5px;
+	font-size: 13px;
+	color:#3f3f3f;
+	border: 1px solid #f0f0f0;
+	background-color: #f9f9f9;
+	width: 83%;
+}
+</style>
+
+<% unless @customer.nil? or @customer.blank? %>
+  <div class="cust-search-info">
+  	<div style="float:left;"><%= image_tag @customer.image_url.to_s, :size => '30x30' %></div>
+    <div style="margin-left:35px;">
+    	<strong>
+    		<%= @customer.first_name+' '+@customer.middle_name+' '+@customer.last_name %>
+    	</strong>
+    	   <div>Phone: <%= @customer.phone1+' / '+@customer.phone2 %></div>
+    	  <div><%= @customer.address %></div>
+    </div>
+  </div>
+<% else %>
+<div class="cust-search-info">
+  <center> No Customer found  </center>
+</div>
+<%end%>

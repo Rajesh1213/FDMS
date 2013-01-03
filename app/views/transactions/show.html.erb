@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tran date:</b>
+  <%= @transaction.tran_date %>
+</p>
+
+<p>
+  <b>Particulars:</b>
+  <%= @transaction.particulars %>
+</p>
+
+<p>
+  <b>Debit:</b>
+  <%= @transaction.debit %>
+</p>
+
+<p>
+  <b>Credit:</b>
+  <%= @transaction.credit %>
+</p>
+
+<p>
+  <b>Balance:</b>
+  <%= @transaction.balance %>
+</p>
+
+<p>
+  <b>Opening balance:</b>
+  <%= @transaction.opening_balance %>
+</p>
+
+<p>
+  <b>Closing balance:</b>
+  <%= @transaction.closing_balance %>
+</p>
+
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>

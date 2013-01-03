@@ -1,0 +1,48 @@
+<%= form_for(@m_director) do |f| %>
+  <% if @m_director.errors.any? %>
+    <div id="error_explanation" class="errorExplanation" >
+      <h2><%= pluralize(@m_director.errors.count, "error") %> prohibited this m_director from being saved:</h2>
+
+      <ul>
+      <% @m_director.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="label-field-pair">
+    <label> First Name <span class="necessary-field">*</span> </label>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="label-field-pair">
+   <label> Last Name <span class="necessary-field">*</span> </label>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="label-field-pair">
+    <label> Phone 1 <span class="necessary-field">*</span> </label>
+    <%= f.text_field :phone1 %>
+  </div>
+  <div class="label-field-pair">
+    <label> Phone 2 </label>
+    <%= f.text_field :phone2 %>
+  </div>
+
+  <div class="label-field-pair-text-area">
+    <label for="address"> Address <span class="necessary-field">*</span> </label>
+    <div class="textarea-input-bg"><%= f.text_area :address,:cols => 27, :rows => 5 %></div>
+  </div>
+
+  <div class="label-field-pair">
+    <label> Email<span class="necessary-field">*</span> </label>
+    <%= f.text_field :email %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+  </div>
+  <br/>
+  <div class="actions">
+    <%= f.submit  :class => 'submit-button'%>
+  </div>
+<% end %>

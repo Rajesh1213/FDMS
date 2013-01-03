@@ -1,0 +1,29 @@
+<%= form_for(@finance_outflow) do |f| %>
+  <% if @finance_outflow.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@finance_outflow.errors.count, "error") %> prohibited this finance_outflow from being saved:</h2>
+
+      <ul>
+      <% @finance_outflow.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="label-field-pair">
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :credited_from %>
+    <%= f.text_field :credited_from %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :income_type %>
+    <%= f.text_field :income_type %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class=> "submit-button"  %>
+  </div>
+<% end %>

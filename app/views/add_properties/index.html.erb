@@ -1,0 +1,59 @@
+<style>
+.finanace-heading{
+  background: #e5e5e5;
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 3px;
+  color: #666;
+}
+li { list-style: none; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif }
+</style>
+
+<div id="content-header">
+  <%= image_tag('rents.jpeg', :height => '65px') %>
+  <h1> Properties </h1>
+  <h3> Properties Details </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to "Add New Property", new_add_property_path %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+<table class ="table table-bordered">
+  <tr>
+    <th>Area</th>
+    <th>Property type</th>
+    <th>Street address</th>
+    <th>City</th>
+    <th>Pincode</th>
+    <th>State</th>
+    <th>Country</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @add_properties.each do |add_property| %>
+  <tr>
+    <td><%= add_property.area %></td>
+    <td><%= add_property.property_type %></td>
+    <td><%= add_property.street_address %></td>
+    <td><%= add_property.city %></td>
+    <td><%= add_property.pincode %></td>
+    <td><%= add_property.state %></td>
+    <td><%= add_property.country %></td>
+    <td><%= link_to 'Show', add_property %></td>
+    <td><%= link_to 'Edit', edit_add_property_path(add_property) %></td>
+    <td><%= link_to 'Destroy', add_property, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+

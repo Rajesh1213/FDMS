@@ -1,0 +1,61 @@
+<%= javascript_include_tag 'prototype' %>
+<div id="content-header">
+  <%= image_tag('customer.jpeg') %>
+  <h1> Customers </h1>
+  <h3> Listing Customers </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to "Add Customer", :action => "new" %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+
+  <div class="table" style="zoom: 1; overflow: auto;" >
+<table class="table table-striped table-hover table-bordered" align="center" width="100%" cellpadding="1" cellspacing="1">
+<thead>
+  <tr class="tr-head">
+    <th class="colName ">Account number</th>
+    <th class="colName ">Full Name</th>
+    <th class="colPosition">Phone1</th>
+    <th class="colPosition">Phone2</th>
+    <th class="colPosition">Address</th>
+    <th class="colPosition">Customer email</th>
+    
+    <th class="colPosition"></th>
+  </tr>
+</thead>
+
+<% @customers.each do |customer| %>
+  <tr class="tr-<%= cycle('odd', 'even') %>">
+    <td><%= customer.account_number %></td>
+    <td><%= customer.first_name %> <%= customer.middle_name %> <%= customer.last_name %> </td>
+    <td><%= customer.phone1 %></td>
+    <td><%= customer.phone2 %></td>
+    <td><%= customer.address %></td>
+    <td><%= customer.customer_email %></td>
+    
+    <td><%= link_to 'Show', customer %></td>
+    <% if can? :update, customer %>
+    <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+    <% end %>
+    <% if can? :destroy, customer %>
+    <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+</div>
+<br />
+  
+
+
+  </div>
+</div>

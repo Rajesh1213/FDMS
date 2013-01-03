@@ -1,0 +1,28 @@
+<style>.box{width: 750px;margin: 0px auto;}</style>
+<div id="content-header">
+  <%= image_tag 'home.png' %>	
+  <h1> Welcome </h1>
+  <h3> Rental Management System </h3>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'New Tenant', new_rent_path %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+    
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Rental", rents_home_path %></div>
+        <div class="link-descr">Rent Details/Manage Rentals </div>
+      </div>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Properties', add_properties_path %></div>
+        <div class="link-descr"> Manage Properties </div>
+      </div>
+       
+       </div>
+ </div>   

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  rent_amount: MyString
+  due_date: 2012-11-27 02:00:00
+  paid_date: 2012-11-27 02:00:00
+  month: MyString
+  next_due_date: 2012-11-27 02:00:00
+  paid_amount: MyString
+  bal_amount: MyString
+  collected_by: MyString
+  rent_id: 1
+
+two:
+  rent_amount: MyString
+  due_date: 2012-11-27 02:00:00
+  paid_date: 2012-11-27 02:00:00
+  month: MyString
+  next_due_date: 2012-11-27 02:00:00
+  paid_amount: MyString
+  bal_amount: MyString
+  collected_by: MyString
+  rent_id: 1

@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tran date:</b>
+  <%= @df_transaction.tran_date %>
+</p>
+
+<p>
+  <b>Tran:</b>
+  <%= @df_transaction.tran_id %>
+</p>
+
+<p>
+  <b>Particulars:</b>
+  <%= @df_transaction.particulars %>
+</p>
+
+<p>
+  <b>Debit:</b>
+  <%= @df_transaction.debit %>
+</p>
+
+<p>
+  <b>Credit:</b>
+  <%= @df_transaction.credit %>
+</p>
+
+<p>
+  <b>Balance:</b>
+  <%= @df_transaction.balance %>
+</p>
+
+<p>
+  <b>Opening balance:</b>
+  <%= @df_transaction.opening_balance %>
+</p>
+
+<p>
+  <b>Closing balance:</b>
+  <%= @df_transaction.closing_balance %>
+</p>
+
+<p>
+  <b>Monthly f investment:</b>
+  <%= @df_transaction.monthly_f_investment_id %>
+</p>
+
+<p>
+  <b>Daily finance:</b>
+  <%= @df_transaction.daily_finance %>
+</p>
+
+
+<%= link_to 'Edit', edit_df_transaction_path(@df_transaction) %> |
+<%= link_to 'Back', df_transactions_path %>

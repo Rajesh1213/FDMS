@@ -1,0 +1,41 @@
+<h1>Listing monthly_interests</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Customer</th>
+    <th>Loan amount</th>
+    <th>Interest per day</th>
+    <th>Date of issue</th>
+    <th>Due closing date</th>
+    <th>Total interest</th>
+    <th>Total paid</th>
+    <th>Loan name</th>
+    <th>Payment days</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @monthly_interests.each do |monthly_interest| %>
+  <tr>
+    <td><%= monthly_interest.user_id %></td>
+    <td><%= monthly_interest.customer_id %></td>
+    <td><%= monthly_interest.loan_amount %></td>
+    <td><%= monthly_interest.interest_per_day %></td>
+    <td><%= monthly_interest.date_of_issue %></td>
+    <td><%= monthly_interest.due_closing_date %></td>
+    <td><%= monthly_interest.total_interest %></td>
+    <td><%= monthly_interest.total_paid %></td>
+    <td><%= monthly_interest.loan_name %></td>
+    <td><%= monthly_interest.payment_days %></td>
+    <td><%= link_to 'Show', monthly_interest %></td>
+    <td><%= link_to 'Edit', edit_monthly_interest_path(monthly_interest) %></td>
+    <td><%= link_to 'Destroy', monthly_interest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Monthly interest', new_monthly_interest_path %>

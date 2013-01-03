@@ -1,0 +1,2 @@
+module DailyFinanceHelper
+end

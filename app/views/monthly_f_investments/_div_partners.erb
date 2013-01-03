@@ -1,0 +1,24 @@
+<!-- <div class="label-field-pair">
+    <label> Select Partner <span class="necessary-field">*</span> </label>
+    <div class="text-input-bg"> <%= select_tag 'monthly_f_investment[partner_id]', options_for_select(@partners.collect{ |u| [u.first_name + ' ' + u.last_name + '- ('+ u.unique_id + ')', u.id] }) %> </div>
+  </div>
+ -->
+<div class="box">
+  <div class="label-field-pair">
+  <label>Select Partner <span class="necessary-field">*</span> </label>
+  <%= image_tag("loader.gif",
+  :align => "absmiddle",
+  :border => 0,
+  :id => "loader",
+  :style =>"display: none;" ) %>
+  <div class="text-input-bg">
+  <%= select :partner_id, :id,
+  @partners.map {|b| [b.first_name + ' ' + b.last_name + '- ('+ b.unique_id + ')', b.id] },
+  {:prompt => "Select a Partner"},
+  {:onchange => "#{remote_function(
+  :url => {:action => 'update_partners_details' },
+  :with => "'pid='+value",
+  :before => "Element.show('loader')",
+  :success => "Element.hide('loader')"  )}"} %>
+  </div>
+  </div>

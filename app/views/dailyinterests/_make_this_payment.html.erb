@@ -1,0 +1,44 @@
+<script>
+      jQuery.facebox({ div: '#box' }, 'my-groovy-style');
+</script>
+
+<style>
+h2{text-align: center;color: #666;}
+.l-cust-info{color: #ccc;border :1px solid #c1d7fd ;text-align: center; background: #f1f6ff;}
+.success-message{background: #fff1ab; border: 1px solid #efdc86; padding: 10px; text-align: center; }
+</style>
+
+ <% if @track_record.payment_date.nil? %>
+<div id ="box">
+	<div class="l-cust-info"> 
+	<h2> <%= @track_record.dailyinterest.loan_name %> - Day: <%= @id %>  </h2>  
+    <%= @track_record.dailyinterest.customer.first_name %> <%= @track_record.dailyinterest.customer.middle_name %> <%= @track_record.dailyinterest.customer.last_name %> 
+     </div>
+	<%= form_remote_tag :url => {:action => "confirm_payment"} do -%>
+	  <div class="label-field-pair">
+	  	<label> Amount: </label>
+        <label> &nbsp; Rs. <%=  @amount %> </label> 
+	  </div>
+	  <div class="label-field-pair">
+	  	<label> Remarks: </label>
+	  	<%= text_field_tag 'remarks' %>
+	  </div>
+	  <%= hidden_field_tag "id", @track_record.id  %>
+	  <%= hidden_field_tag "sno", @id %>
+      <div><%= submit_tag "Make Payment",:class=> "submit-button", :disable_with => "Please wait while Making Payment ..." %></div>
+    <% end -%>
+
+</div>
+<% else %>
+<div id ="box">
+	<div class="l-cust-info"> 
+		<h2> <%= @track_record.dailyinterest.loan_name %> - Day: <%= @id %>  </h2>  
+		<%= @track_record.dailyinterest.customer.first_name %> <%= @track_record.dailyinterest.customer.middle_name %> <%= @track_record.dailyinterest.customer.last_name %> 
+	</div>
+	<div class="success-message">
+		<div class="label-field-pair">
+		   <h4> Payment Amount Rs. <%= @amount %> /-  Recieved Successfully. </h4>
+	    </div>
+	</div>
+</div>	
+<% end %>

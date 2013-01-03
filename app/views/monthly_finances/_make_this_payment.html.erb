@@ -1,0 +1,74 @@
+
+
+<script> jQuery.facebox({ div: '#box' },  'my-groovy-style'); </script>
+
+<style>
+h2{text-align: center;color: #666;}
+.l-cust-info{color: #ccc;border :1px solid #c1d7fd ;text-align: center; background: #f1f6ff;}
+.success-message{background: #fff1ab; border: 1px solid #efdc86; padding: 10px; text-align: center;}
+</style>
+ <% if @track_record.payment_date.nil? %>
+<div id ="box">
+	<div class="l-cust-info"> 
+	<h2> <%= @track_record.monthly_finance.loan_name %> - Day: <%= @id %>  </h2>  
+    <%= @track_record.monthly_finance.customer.first_name %> <%= @track_record.monthly_finance.customer.middle_name %> <%= @track_record.monthly_finance.customer.last_name %> 
+     </div>
+	<%= form_remote_tag :url => {:action => "confirm_payment"}, :html =>{:id => "make_payment"} do -%>
+	  <div class="label-field-pair">
+	  	<label> Amount:  </label>
+        <label> &nbsp; Rs. <%=  @track_record.amount %> </label> 
+	  </div>
+
+	  <div class="label-field-pair">
+	  	<label> Amount Paying: <span class="necessary-field">*</span> </label>
+	  	<%= text_field_tag 'paid_amount', nil, :class => " " %>
+	  </div>
+
+	  <% unless @amount.nil? or @amount.blank? %>
+	   <div class="label-field-pair">
+	  	<label>  </label>
+        <label> &nbsp;<font color= "red"> <%= @amount %> </font> </label> 
+	  </div>
+	  <% end%>
+	  
+	  <div class="label-field-pair">
+	  	<label> Payment Date:  <span class="necessary-field">*</span> </label>
+	  	<%= calendar_date_select_tag 'payment_date', Date.today.to_date %>
+	  </div>
+
+      <% unless @payment_date.nil? or @payment_date.blank? %>
+	   <div class="label-field-pair">
+	  	<label>  </label>
+        <label><font color= "red">&nbsp; <%= @payment_date %> </font> </label> 
+	  </div>
+	  <% end%>
+
+	  <div class="label-field-pair">
+	  	<label> Penalty: <span class="necessary-field">*</span> </label>
+	  	<%= text_field_tag 'penalty', 0 %>
+	  </div>
+
+
+	  <div class="label-field-pair-text-area">
+	   <label for="customer_remarks"> Customer Remarks </label>
+	   <div class="textarea-input-bg"><%= text_area_tag :customer_remarks %></div>
+	  </div> 
+	  <%= hidden_field_tag "id", @track_record.id  %>
+	  <%= hidden_field_tag "sno", @id %>
+      <div><%= submit_tag "Make Payment",:class=> "submit-button", :disable_with => "Please Wait..." %></div>
+    <% end -%>
+
+</div>
+<% else %>
+<div id ="box">
+	<div class="l-cust-info"> 
+		<h2> <%= @track_record.monthly_finance.loan_name %> - Day: <%= @id %>  </h2>  
+		<%= @track_record.monthly_finance.customer.first_name %> <%= @track_record.monthly_finance.customer.middle_name %> <%= @track_record.monthly_finance.customer.last_name %> 
+	</div>
+	<div class="success-message">
+		<div class="label-field-pair">
+		   <h4> Payment Amount Rs. <%= @track_record.amount %> /-  Recieved Successfully. </h4>
+	    </div>
+	</div>
+</div>	
+<% end %>

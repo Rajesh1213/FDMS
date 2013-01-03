@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  customer_id: 1
+  loan_name: MyString
+  string: MyString
+  loan_amount: 
+  date_of_issue: 2012-07-21 13:02:23
+  payment_days: 1
+  agreement_date: 2012-07-21 13:02:23
+  due_date: 2012-07-21 13:02:23
+  interest_percent: 1
+  amount_recieved: MyString
+  main_balance: MyString
+  cleared_balance: MyString
+  loan_status: MyString
+
+two:
+  customer_id: 1
+  loan_name: MyString
+  string: MyString
+  loan_amount: 
+  date_of_issue: 2012-07-21 13:02:23
+  payment_days: 1
+  agreement_date: 2012-07-21 13:02:23
+  due_date: 2012-07-21 13:02:23
+  interest_percent: 1
+  amount_recieved: MyString
+  main_balance: MyString
+  cleared_balance: MyString
+  loan_status: MyString

@@ -1,0 +1,44 @@
+<style>
+.box{
+    width: 500px;
+    margin: 0px auto;
+}
+.transations_info{
+  text-align: right;
+  padding:8px 50px 8px 0px ;
+  font-size: 14px;
+  margin: 0px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+</style>
+
+
+<div id="content-header">
+  <%= image_tag('users-icon.jpeg') %>
+  <h1> Monthly Finance </h1>
+  <h3> Issue New Monthly Finance </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to "Add New Customer", :controller => "customers", :action => "new" %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+    <div class="transations_info">
+    <span>Total Balance: <strong> Rs.<%= @transaction  %> /- </strong> </span>
+  </div>
+  <div class="box">
+<%= render 'form' %>
+
+<hr/>
+
+
+</div>
+</div>

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Rent amount:</b>
+  <%= @rents_transaction.rent_amount %>
+</p>
+
+<p>
+  <b>Due date:</b>
+  <%= @rents_transaction.due_date %>
+</p>
+
+<p>
+  <b>Paid date:</b>
+  <%= @rents_transaction.paid_date %>
+</p>
+
+<p>
+  <b>Month:</b>
+  <%= @rents_transaction.month %>
+</p>
+
+<p>
+  <b>Next due date:</b>
+  <%= @rents_transaction.next_due_date %>
+</p>
+
+<p>
+  <b>Paid amount:</b>
+  <%= @rents_transaction.paid_amount %>
+</p>
+
+<p>
+  <b>Bal amount:</b>
+  <%= @rents_transaction.bal_amount %>
+</p>
+
+<p>
+  <b>Collected by:</b>
+  <%= @rents_transaction.collected_by %>
+</p>
+
+<p>
+  <b>Rent:</b>
+  <%= @rents_transaction.rent_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_rents_transaction_path(@rents_transaction) %> |
+<%= link_to 'Back', rents_transactions_path %>

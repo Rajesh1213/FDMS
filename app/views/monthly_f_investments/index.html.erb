@@ -1,0 +1,82 @@
+<style>
+.table td, .table tr { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;}
+.total-invest-info{
+  /*background-color: red;*/
+  text-align: right;
+  padding:8px 50px 8px 0px ;
+  font-size: 14px;
+  margin: 0px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+</style>
+<div id="content-header">
+  <%= image_tag('users-icon.jpeg') %>
+  <h1> Company's Monthly Finance Investments </h1>
+  <h3> Listing Company's Investments & Investors </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'New Invest...', new_monthly_f_investment_path %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <br/>
+  <div class="box">
+
+<div class="total-invest-info">Total Investment In The Company:<strong> Rs. <%= @total %>  /- </strong></div>
+
+<% unless @monthly_f_investments.nil? %>
+<table class="table table-bordered" >
+  <tr>
+    <th>Sno.</th>
+    <th>Managing Director</th>
+    <th>Partner</th>
+    <th>Investment amount</th>
+    <th>Invested In </th>
+    
+    <th></th>
+    <th></th>
+  </tr>
+<% i = 0  %>
+<% @monthly_f_investments.each do |monthly_f_investment| %>
+  <tr>
+    <td><%= i = i.next %></td>
+
+    <td>
+      <% unless monthly_f_investment.m_director.nil? %> 
+        <%= monthly_f_investment.m_director.first_name+' '+monthly_f_investment.m_director.last_name+' -( '+monthly_f_investment.m_director.unique_id+' ) '  %>
+      <% end %>
+    </td>
+    
+    <td>
+      <% unless monthly_f_investment.partner.nil? %>
+      <%= monthly_f_investment.partner.first_name+' '+monthly_f_investment.partner.last_name+' -( '+monthly_f_investment.partner.unique_id+' ) ' %>
+      <% end %>
+    </td>
+    
+    <td>Rs. <%= monthly_f_investment.investment_amount %></td>
+    <td> <strong> <%= monthly_f_investment.invested_in %> </strong> </td>
+    
+    <td><%= link_to 'Edit', edit_monthly_f_investment_path(monthly_f_investment) %></td>
+    <td><%= link_to 'Destroy', monthly_f_investment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+<% else %>
+<div> Please add Investments </div>
+<% end%>
+
+<br />
+
+
+</div>
+</div>

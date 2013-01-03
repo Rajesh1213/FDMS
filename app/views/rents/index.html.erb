@@ -1,0 +1,74 @@
+<style>
+.finanace-heading{
+  background: #e5e5e5;
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 3px;
+  color: #666;
+}
+li { list-style: none; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif }
+</style>
+
+<div id="content-header">
+  <%= image_tag('rents.jpeg', :height => '65px') %>
+  <h1> Rents </h1>
+  <h3> Customer Loan Details </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'New Tenant', new_rent_path %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+<table class ="table table-bordered">
+  <tr>
+    <th>User</th>
+    <th> Tenant name </th>
+    <th>Security doc 1</th>
+    <th>Security doc 2</th>
+    <th>Security doc 3</th>
+    <th>Security doc 4</th>
+    <th>Signed contract date</th>
+    <th>Contract period</th>
+    <th>Contract expiry date</th>
+    <th>Reneval contract date</th>
+    <th>Address</th>
+    <th>Phone</th>
+    <th>Mobile</th>
+    <th>Description</th>
+  </tr>
+
+<% @rents.each do |rent| %>
+  <tr>
+    <td><%= rent.user_id %></td>
+    <td><%= rent.tenant_name %></td>
+    <td><%= rent.security_doc_1 %></td>
+    <td><%= rent.security_doc_2 %></td>
+    <td><%= rent.security_doc_3 %></td>
+    <td><%= rent.security_doc_4 %></td>
+    <td><%= rent.signed_contract_date %></td>
+    <td><%= rent.contract_period %></td>
+    <td><%= rent.contract_expiry_date %></td>
+    <td><%= rent.reneval_contract_date %></td>
+    <td><%= rent.address %></td>
+    <td><%= rent.phone %></td>
+    <td><%= rent.mobile %></td>
+    <td><%= rent.description %></td>
+    <td><%= link_to 'Show', rent %>
+        <%= link_to 'Edit', edit_rent_path(rent) %>
+        <%= link_to 'Destroy', rent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+</div>
+</div>
+
+

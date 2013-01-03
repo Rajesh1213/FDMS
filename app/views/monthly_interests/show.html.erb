@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @monthly_interest.user_id %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%= @monthly_interest.customer_id %>
+</p>
+
+<p>
+  <b>Loan amount:</b>
+  <%= @monthly_interest.loan_amount %>
+</p>
+
+<p>
+  <b>Interest per day:</b>
+  <%= @monthly_interest.interest_per_day %>
+</p>
+
+<p>
+  <b>Date of issue:</b>
+  <%= @monthly_interest.date_of_issue %>
+</p>
+
+<p>
+  <b>Due closing date:</b>
+  <%= @monthly_interest.due_closing_date %>
+</p>
+
+<p>
+  <b>Total interest:</b>
+  <%= @monthly_interest.total_interest %>
+</p>
+
+<p>
+  <b>Total paid:</b>
+  <%= @monthly_interest.total_paid %>
+</p>
+
+<p>
+  <b>Loan name:</b>
+  <%= @monthly_interest.loan_name %>
+</p>
+
+<p>
+  <b>Payment days:</b>
+  <%= @monthly_interest.payment_days %>
+</p>
+
+
+<%= link_to 'Edit', edit_monthly_interest_path(@monthly_interest) %> |
+<%= link_to 'Back', monthly_interests_path %>

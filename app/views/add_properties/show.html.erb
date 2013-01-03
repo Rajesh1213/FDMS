@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Area:</b>
+  <%= @add_property.area %>
+</p>
+
+<p>
+  <b>Property type:</b>
+  <%= @add_property.property_type %>
+</p>
+
+<p>
+  <b>Street address:</b>
+  <%= @add_property.street_address %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @add_property.city %>
+</p>
+
+<p>
+  <b>Pincode:</b>
+  <%= @add_property.pincode %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @add_property.state %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%= @add_property.country %>
+</p>
+
+
+<%= link_to 'Edit', edit_add_property_path(@add_property) %> |
+<%= link_to 'Back', add_properties_path %>

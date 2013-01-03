@@ -1,0 +1,68 @@
+<div id="content-header">
+ <%= image_tag 'home.png' %>	
+  <h1> Welcome </h1>
+  <h3> Financial Data Management System </h3>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to " My Profile ", :controller => "customers", :action => "my_profile" %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+		
+    <div class="button-box">
+      <%= link_to image_tag('users-icon.png'), {:controller => "customers", :action => "index"},
+        :class => "option_buttons", :id => "student_details_button", :title => ""%>
+        <div style="text-align: center"> Customers </div>
+    </div>
+     
+     
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Daily finance', new_daily_finance_path %></div>
+        <div class="link-descr"> Issue/Pay Daily Finance</div>
+      </div>
+   
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Monthly finance', :controller => "monthly_finances", :action => "dashboard" %></div>
+        <div class="link-descr">Issue/Pay Monthly Finance</div>
+      </div>
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Daily Interest',  new_dailyinterest_path %></div>
+        <div class="link-descr"> Issue/Pay Daily Interest </div>
+      </div>
+   
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Monthly Interest', new_monthly_interest_path %></div>
+        <div class="link-descr"> Issue/Pay Monthly Interest </div>
+      </div>
+
+      <div class="link-box">  </div>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Rents', rents_path %></div>
+        <div class="link-descr"> Rent Details </div>
+      </div>
+
+      <div class="link-box">  </div>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Settings', :controller => "home", :action => "settings" %></div>
+        <div class="link-descr"> Manage MD's/Partners & Investments </div>
+      </div>
+
+      <div class="link-box">  </div>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Personal Finance Management ', :controller => "personal_finance", :action => "index" %></div>
+        <div class="link-descr"> Manage Personal Finance Inflow/Outflow </div>
+      </div>
+      
+
+      <%= link_to "Create PDF document", index_pdf_path(:format => :pdf) %>
+      
+      
+  </div>
+ </div>		

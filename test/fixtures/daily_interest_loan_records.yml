@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  dailyinterest_id: 1
+  amount: MyString
+  due_date: 2012-08-05 14:06:00
+  payment_date: 2012-08-05 14:06:00
+  user_id: 1
+
+two:
+  dailyinterest_id: 1
+  amount: MyString
+  due_date: 2012-08-05 14:06:00
+  payment_date: 2012-08-05 14:06:00
+  user_id: 1

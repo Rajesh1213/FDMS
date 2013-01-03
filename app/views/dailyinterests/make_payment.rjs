@@ -1,0 +1,2 @@
+page.replace_html 'modal-box', :partial => 'make_this_payment'
+#page << "Modalbox.show($('modal-box'), {title: ''});"

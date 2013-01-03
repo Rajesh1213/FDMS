@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Amount:</b>
+  <%= @finance_outflow.amount %>
+</p>
+
+<p>
+  <b>Credited from:</b>
+  <%= @finance_outflow.credited_from %>
+</p>
+
+<p>
+  <b>Income type:</b>
+  <%= @finance_outflow.income_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_finance_outflow_path(@finance_outflow) %> |
+<%= link_to 'Back', finance_outflows_path %>

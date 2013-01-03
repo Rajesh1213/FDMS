@@ -1,0 +1,37 @@
+<style>
+table a{
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+}
+table a:hover{
+    text-decoration: underline;
+}
+</style>
+
+<table class="table table-bordered">
+<thead>
+  <tr class="tr-head">
+    <th class="">Account number</th>
+    <th class="">Full Name</th>
+    <th class="">Phone1</th>
+    <th class="">Phone2</th>
+    <th class="">Address</th>
+    <th class="">Customer email</th>
+  </tr>
+</thead>
+
+<% @customers.each do |customer| %>
+  <tr class="tr-<%= cycle('odd', 'even') %>">
+    <td><%= link_to(customer.account_number, :controller => "customers", :action => "show", :id => customer.id )  %></td>
+    <td><%= link_to(customer.first_name+' '+customer.middle_name+' '+customer.last_name, :controller => "customers", :action => "show", :id => customer.id) %> </td>
+    <td><%= customer.phone1 %></td>
+    <td><%= customer.phone2 %></td>
+    <td><%= customer.address[0..30] %>...</td>
+    <td><%= customer.customer_email %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+<br />
+

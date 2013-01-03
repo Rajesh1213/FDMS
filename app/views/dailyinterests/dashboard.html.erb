@@ -1,0 +1,24 @@
+<style>.box{width: 750px;margin: 0px auto;}</style>
+<div id="content-header">
+  <%= image_tag 'home.png' %>	
+  <h1> Welcome </h1>
+  <h3> Daily Finance Management System </h3>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to "Add Customer", :controller => "customers", :action => "new" %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+    
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'New Dailyinterest', new_dailyinterest_path %>
+</div>
+        <div class="link-descr">Issue New Daily Interest </div>
+      </div>
+       </div>
+ </div>   

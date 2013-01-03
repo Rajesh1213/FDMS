@@ -1,0 +1,52 @@
+<%= form_for(@partner) do |f| %>
+  <% if @partner.errors.any? %>
+    <div id="error_explanation" class="errorExplanation" >
+      <h2><%= pluralize(@partner.errors.count, "error") %> prohibited this partner from being saved:</h2>
+
+      <ul>
+      <% @partner.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="label-field-pair">
+    <label> Select Managing Director <span class="necessary-field">*</span> </label>
+    <div class="text-input-bg"> <%= f.select 'm_director_id', options_for_select(@m_directors.collect{ |u| [u.first_name + ' ' + u.last_name + '- ('+ u.unique_id + ')', u.id] }) %> </div>
+  </div>
+  <div class="label-field-pair">
+    <label> First Name <span class="necessary-field">*</span> </label>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="label-field-pair">
+    <label> Last_name <span class="necessary-field">*</span> </label>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="label-field-pair">
+    <label> Phone 1 <span class="necessary-field">*</span> </label>
+    <%= f.text_field :phone1 %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :phone2 %>
+    <%= f.text_field :phone2 %>
+  </div>
+
+  <div class="label-field-pair-text-area">
+    <label for="address"> Address <span class="necessary-field">*</span> </label>
+    <div class="textarea-input-bg"><%= f.text_area :address,:cols => 27, :rows => 5 %></div>
+  </div>
+
+  <div class="label-field-pair">
+    <label> Email <span class="necessary-field">*</span> </label>
+    <%= f.text_field :email %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+  </div>
+ <br/>
+  <div class="actions">
+    <%= f.submit :class => "submit-button" %>
+  </div>
+<% end %>

@@ -1,0 +1,48 @@
+<script> jQuery.facebox({ div: '#box' },  'my-groovy-style'); </script>
+
+
+<style>
+h2{text-align: center;color: #666;}
+.l-cust-info{color: #444;border :1px solid #c1d7fd ;text-align: center; background: #f1f6ff; margin-top: 10px; }
+.success-message{background: #fff1ab; border: 1px solid #efdc86; padding: 10px; text-align: center;}
+</style>
+<div id ="box">
+
+<%if @track_record.bal_amount != 0 %>
+
+<div class="l-cust-info"> 
+	<h4> Rent for the Month of :  <i> <%= @track_record.due_date.strftime("%B")%> </i> .</h4>  
+	<%= form_remote_tag :url => {:action => "confirm_payment"}, :html =>{:id => "make_payment"} do -%>
+	  <div class="label-field-pair">
+	  	<label> Balance Amount:  </label>
+        <label> &nbsp; Rs. <%=  @track_record.bal_amount %> </label> 
+	  </div>
+
+	  <div class="label-field-pair">
+	  	<label> Amount Paying: <span class="necessary-field">*</span> </label>
+	  	<%= text_field_tag 'paid_amount', nil, :class => " " %>
+	  </div>
+
+	  <div class="label-field-pair">
+	  	<label> Payment Date:  <span class="necessary-field">*</span> </label>
+	  	&nbsp;<%= calendar_date_select_tag 'paid_date', Date.today.to_date %>
+	  </div>
+
+	  <div class="label-field-pair">
+		<label > collected by  </label>
+		<%= text_field_tag 'collected_by' %>
+	  </div> 
+
+	  <%= hidden_field_tag "id", @track_record.id  %>
+
+      <div><%= submit_tag "Make Payment",:class=> "submit-button", :disable_with => "Please Wait..." %></div>
+
+    <% end -%>
+
+</div>
+<% else %>
+<div class="l-cust-info">
+<h4> Rs.<%= @amount %>, Amount Paid Successfully! </h4> 
+</div>
+<% end %>
+</div>

@@ -1,0 +1,74 @@
+<style>
+.partner-info{font-size: 12px; margin-top: 20px; }
+</style>
+<div class="partner-info"> 
+<div style="text-align:center; color:green; font-size: 13px;"> <strong> Current Investment Details </strong> </div>
+<table class="table table-bordered"> 
+  <tr>
+    <th>Sno.</th>
+    <th>Managing Director</th>
+    <th>Partner</th>
+    <th>Investment amount</th>
+    <th>Invested In</th>
+  </tr>
+  <% i = 0 %>
+  <tr>
+
+  <% @current_info.each do |monthly_f_investment| %>
+  
+  	<td><%= i = i.next %></td>
+
+    <td>
+      <% unless monthly_f_investment.m_director.nil? %> 
+        <%= monthly_f_investment.m_director.first_name+' '+monthly_f_investment.m_director.last_name+' -( '+monthly_f_investment.m_director.unique_id+' ) '  %>
+      <% end %>
+    </td>
+    
+    <td>
+      <% unless monthly_f_investment.partner.nil? %>
+      <%= monthly_f_investment.partner.first_name+' '+monthly_f_investment.partner.last_name+' -( '+monthly_f_investment.partner.unique_id+' ) ' %>
+      <% end %>
+    </td>
+    
+    <td>Rs. <%= monthly_f_investment.investment_amount %></td>
+  	<td><%=monthly_f_investment.invested_in %></td>
+  </tr>
+<% end %>
+</table>
+
+<hr/>
+<br/>
+<div style="text-align:center; color:brown; font-size: 13px;"> <strong> Previous Investment Details (Deleted) </strong> </div>
+<table class="table table-bordered"> 
+  <tr>
+    <th>Sno.</th>
+    <th>Managing Director</th>
+    <th>Partner</th>
+    <th>Investment amount</th>
+    <th>Invested In</th>
+  </tr>
+  <% i = 0 %>
+  <tr>
+
+  <% @previous_info.each do |monthly_f_investment| %>
+  
+  	<td><%= i = i.next %></td>
+
+    <td>
+      <% unless monthly_f_investment.m_director.nil? %> 
+        <%= monthly_f_investment.m_director.first_name+' '+monthly_f_investment.m_director.last_name+' -( '+monthly_f_investment.m_director.unique_id+' ) '  %>
+      <% end %>
+    </td>
+    
+    <td>
+      <% unless monthly_f_investment.partner.nil? %>
+      <%= monthly_f_investment.partner.first_name+' '+monthly_f_investment.partner.last_name+' -( '+monthly_f_investment.partner.unique_id+' ) ' %>
+      <% end %>
+    </td>
+    
+    <td>Rs. <%= monthly_f_investment.investment_amount %></td>
+  	<td><%= monthly_f_investment.invested_in %></td>
+  </tr>
+<% end %>
+</table>
+</div>

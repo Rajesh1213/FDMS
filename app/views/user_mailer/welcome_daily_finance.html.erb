@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h2>Welcome to Ranga's Financial Entrprise.</h2>
+
+    <p> Hi <%= @user.first_name+" "+@user.middle_name+" "+@user.last_name %> </p>
+
+    <p>
+      Your daily finance have been successfully issued at Ranga's Financial Entrprise,<br/>
+      your <strong> <h2> Account Number is:  <%= @user.account_number %> </h2> </strong> .<br/>
+      <strong>
+        
+        
+    </p>
+
+    <p> Reference Person : <%= @user.reference_person unless @user.reference_person.nil?  %> </p>
+    
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<%= form_for(@rent) do |f| %>
+  <% if @rent.errors.any? %>
+    <div id="error_explanation" class="errorExplanation">
+      <h2><%= pluralize(@rent.errors.count, "error") %> prohibited this rent from being saved:</h2>
+
+      <ul>
+      <% @rent.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="label-field-pair">
+    <%= f.label :tenant_name %>
+    <%= f.text_field :tenant_name %>
+  </div>
+
+    <div class="label-field-pair-text-area">
+    <label for="address"> Permanent Address </label>
+    <div class="textarea-input-bg"><%= f.text_area :permanent_address ,:cols => 27, :rows => 5 %></div>
+  </div>
+
+   <div class="label-field-pair-text-area">
+    <label for="address"> Previous Residing Address </label>
+    <div class="textarea-input-bg"><%= f.text_area :previous_residing_address ,:cols => 27, :rows => 5 %></div>
+  </div>
+
+  <div class="label-field-pair">
+    <label> Mobile Number 1 </label>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="label-field-pair">
+    <label> Mobile Number 2 </label>
+    <%= f.text_field :mobile %>
+  </div>
+  
+    <div class="label-field-pair">
+    <%= f.label :email_id %>
+    <%= f.text_field :email_id %>
+  </div>
+
+ <div><h4> Property Details: </h4></div> <br/><hr/>
+
+  <div class="label-field-pair">
+    <label> Select Availabe Property <span class="necessary-field">*</span> </label>
+    <div class="text-input-bg"> <%= f.select 'add_property_id', options_for_select(@properties.collect{ |u| [u.house_number + ' ' +u.street_address, u.id] }), :prompt => "Select a property" %> </div>
+  </div>
+ 
+  <div class="label-field-pair">
+    <%= f.label :signed_contract_date %>
+    <%= f.calendar_date_select :signed_contract_date %>
+  </div>
+
+  <div class="label-field-pair">
+    <%= f.label :contract_expiry_date %>
+    <%= f.calendar_date_select :contract_expiry_date %>
+  </div>
+
+  <div class="label-field-pair">
+    <label>Contract Period (In Months)<span class="necessary-field">*</span></label> 
+    <%= f.text_field :contract_period %>
+  </div>
+
+  <div class="label-field-pair">
+    <%= f.label :reneval_contract_date %>
+    <%= f.calendar_date_select :reneval_contract_date %>
+  </div>
+  
+  <div class="label-field-pair">
+    <%= f.label :rent_per_month %>
+    <%= f.text_field :rent_per_month %>
+  </div>
+   
+  <div class="label-field-pair">
+    <%= f.label :advance_taken %>
+    <%= f.text_field :advance_taken %>
+  </div>
+
+  <div class="label-field-pair">
+    <%= f.label :security_doc_1 %>
+    <%= f.text_field :security_doc_1 %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :security_doc_2 %>
+    <%= f.text_field :security_doc_2 %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :security_doc_3 %>
+    <%= f.text_field :security_doc_3 %>
+  </div>
+
+  <div class="label-field-pair">
+    <%= f.label :reference %>
+    <%= f.text_field :reference %>
+  </div>
+
+   <div class="label-field-pair-text-area">
+    <label for="address"> Remarks </label>
+    <div class="textarea-input-bg"><%= f.text_area :description,:cols => 27, :rows => 5 %></div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit :class=> "submit-button" %>
+  </div>
+<% end %>
+<!-- 
+tenant_name
+emai_id
+previous_residing_address
+permanent_address
+rent_per_month
+advance_taken
+rent_increase_after_ced
+reference
+remarks -->

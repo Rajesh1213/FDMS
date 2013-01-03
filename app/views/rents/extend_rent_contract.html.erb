@@ -1,0 +1,101 @@
+<style>
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;;
+}
+.table td, .table tr { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;}
+.user_info_ul{
+  list-style: none;
+  width: 400px;
+  float:left;
+}
+.rt_user_info_ul{
+  list-style: none;
+  width: 400px;
+  float:left;
+}
+.user_info_ul li{
+  margin: 5px 0px 5px 0px;
+}
+.rt_user_info_ul li {
+  margin: 5px 0px 5px 0px;
+}
+em {font-size: 10px; font-weight: bold;}
+</style>
+<div id="content-header">
+  <%= image_tag 'home.png' %>	
+  <h1> Rental </h1>
+  <h3> Extend Rents Contract </h3>
+  <h3> <%= @rent.tenant_name %> </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+  	<center><h2> Extend Rent Contract Period</h2><br/><hr/></center>
+  	<br/>
+  	<div class="user_info" style="font-size: 14px; margin: 5px;">
+    <ul style="list-style:none;" class ="user_info_ul" >
+      <li><strong>Tenant Name : </strong> <%= @rent.tenant_name %> </li> 
+      <li><strong>Address: </strong> <%=@rent.permanent_address %> </li>
+      <li><strong>Mobile: </strong> <%=@rent.mobile%> </li>
+      <li><strong>Rented Property: </strong> <%=@rent.add_property.house_number%> </li>
+      <li><strong>Area: </strong> <%=@rent.add_property.area%> </li>
+      <li><strong>Street Address: </strong> <%=@rent.add_property.street_address%> </li>
+    </ul>
+    <ul style="list-style:none;" class ="rt_user_info_ul" >
+      <li><strong>Contract Signed Date : </strong> <%= @rent.signed_contract_date.strftime("%d-%m-%Y") %> </li> 
+      <li><strong>Contract Reneval Date: </strong> <%=@rent.reneval_contract_date.strftime("%d-%m-%Y") %> </li>
+      <li><strong>Advance Taken: </strong> Rs. <%=@rent.advance_taken%> </li>
+    </ul>
+  </div>
+  <div class="clearfix"></div>
+   <br/><hr/><br/>
+  <div class="l-cust-info" style="margin-left: 250px;"> 
+	 
+
+	<%= form_tag  do -%>
+	  
+	  <div class="label-field-pair">
+	  	<label> Extended Contract Signed Date:  <span class="necessary-field">*</span> </label>
+	  	&nbsp;<%= calendar_date_select_tag 'e_c_signed_date', Date.today.to_date %>
+	  </div>
+
+	  <div class="label-field-pair">
+	  	<label> Extended Contract Expiry Date:<span class="necessary-field">*</span> </label>
+	  	&nbsp;<%= calendar_date_select_tag 'e_c_expiry_date', Date.today.to_date+1.year %>
+	  </div>
+
+	  <div class="label-field-pair">
+		<label > Contract Period  (In Months)</label>
+		<%= text_field_tag 'c_period' %>
+	  </div> 
+
+	  <div class="label" style="color:red;"> <em> please enter contract period in months </em></div>
+	   
+      <div class="label-field-pair">
+		<label > New Monthly Rent  (Rs.)</label>
+		<%= text_field_tag 'new_rent' %>
+	  </div> 
+	  <div class="label"> <em>(Just leave blank if rent is same amount.)</em></div>
+	  <div class="label-field-pair">
+		<label > Remarks </label>
+		<%= text_field_tag 'remarks' %>
+	  </div> 
+
+	  <%= hidden_field_tag "id", @rent.id  %>
+	  <br/>
+
+      <div><%= submit_tag "Extend Contract", :confirm => "Are you sure? You want to extend this Contract? ", :class=> "submit-button", :disable_with => "Please Wait..." %></div>
+
+    <% end -%>
+
+</div>
+
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<script>
+$jq = jQuery.noConflict();
+   $jq(document).ready(function() {
+    $jq('#dailyinterest_payment_days').keyup(function() {
+
+      $jq('#dailyinterest_total_interest').val( 
+           $jq('#dailyinterest_interest_per_day').val() * $jq('#dailyinterest_payment_days').val()
+        );
+
+      $jq('#dailyinterest_tatal_paid').val('0')
+
+    });
+  });
+</script>
+
+<%= form_for(@dailyinterest) do |f| %>
+  <% if @dailyinterest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dailyinterest.errors.count, "error") %> prohibited this dailyinterest from being saved:</h2>
+
+      <ul>
+      <% @dailyinterest.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="label-field-pair">
+    <label> Customer Acc No. </label>
+    <% if @customer.nil? %>
+    <%= image_tag("loader.gif",
+      :align => "absmiddle",
+      :border => 0,
+      :id => "loader",
+      :style =>"display: none; float :right;" ) %>
+          
+      <div class="text-input-bg"><%= text_field_tag "query", params[:query], :autocomplete => 'off', :placeholder =>"Enter Account Number" %></div>
+            
+      <div id="page-yield">
+        <%= observe_field 'query', :frequency => 1.0,
+          :update => 'user_information',
+          :url => { :action => 'search_customer' },
+          :before => "Element.show('loader')",
+          :success => "Element.hide('loader')",
+          :with => 'query' %>
+      </div>
+    <div id="account_id" style="display:none;"></div> 
+    <% else %>
+    <%= f.text_field :customer_id , :value => @customer.account_number %>
+    <% end %>
+  </div>
+
+  <div id="account_info"></div>
+  
+  <div class="label-field-pair">
+    <%= f.label :loan_name %>
+    <%= f.text_field :loan_name, :value => @dailyinterest_name %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :loan_amount %>
+    <%= f.text_field :loan_amount %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :interest_per_day %>
+    <%= f.text_field :interest_per_day %>
+  </div>
+   <div class="label-field-pair">
+    <%= f.label :payment_days %>
+    <%= f.text_field :payment_days %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :date_of_issue %>
+    <%= f.calendar_date_select :date_of_issue, :value => Date.today.to_date  %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :due_closing_date %>
+    <%= f.calendar_date_select :due_closing_date %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :total_interest %>
+    <%= f.text_field :total_interest %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :tatal_paid %>
+    <%= f.text_field :tatal_paid %>
+  </div>
+  <div class="actions">
+    <%= f.submit  "Create", :class=> "submit-button"  %>
+  </div>
+<% end %>

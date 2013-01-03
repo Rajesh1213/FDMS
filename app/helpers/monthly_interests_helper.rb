@@ -1,0 +1,2 @@
+module MonthlyInterestsHelper
+end

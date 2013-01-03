@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>M director:</b>
+  <%= @monthly_f_investment.m_director_id %>
+</p>
+
+<p>
+  <b>Partner:</b>
+  <%= @monthly_f_investment.partner_id %>
+</p>
+
+<p>
+  <b>Investment amount:</b>
+  <%= @monthly_f_investment.investment_amount %>
+</p>
+
+<p>
+  <b>Is active:</b>
+  <%= @monthly_f_investment.is_active %>
+</p>
+
+<p>
+  <b>Is deleted:</b>
+  <%= @monthly_f_investment.is_deleted %>
+</p>
+
+
+<%= link_to 'Edit', edit_monthly_f_investment_path(@monthly_f_investment) %> |
+<%= link_to 'Back', monthly_f_investments_path %>

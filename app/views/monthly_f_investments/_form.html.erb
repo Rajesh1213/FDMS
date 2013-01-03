@@ -1,0 +1,60 @@
+<%= form_for(@monthly_f_investment) do |f| %>
+  <% if @monthly_f_investment.errors.any? %>
+    <div id="error_explanation" class="errorExplanation">
+      <h2><%= pluralize(@monthly_f_investment.errors.count, "error") %> prohibited this monthly_f_investment from being saved:</h2>
+
+      <ul>
+      <% @monthly_f_investment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div class="box">
+  <div class="label-field-pair">
+  <label>Select Managing Director</label>
+  <%= image_tag("loader.gif",
+  :align => "absmiddle",
+  :border => 0,
+  :id => "loader",
+  :style =>"display: none;" ) %>
+  <div class="text-input-bg">
+  <%= select :m_director_id, :id,
+  @m_directors.map {|b| [b.first_name + ' ' + b.last_name + '- ('+ b.unique_id + ')', b.id] },
+  {:prompt => "Select a Director"},
+  {:onchange => "#{remote_function(
+  :url => {:action => 'update_partners' },
+  :with => "'md='+value",
+  :before => "Element.show('loader')",
+  :success => "Element.hide('loader')"  )}"} %>
+  </div>
+  </div>
+
+ <div id ="partners">
+ <div class="label-field-pair">
+    <label> Select Partner <span class="necessary-field">*</span> </label>
+    <div class="text-input-bg"> <%= select :m_director_id, :id, "Select Partner", :prompt => "Select a Partner"
+  %> </div>
+  </div>
+ </div>
+
+  <div class="label-field-pair">
+    <label> Investment Amount <span class="necessary-field">*</span> </label>
+    <%= f.text_field :investment_amount, :placeholder => "Enter amount" %>
+  </div>
+ 
+  </br>
+
+  <div class="label-field-pair">
+    <label> Investing In <span class="necessary-field">*</span> </label>
+    <div class="text-input-bg"> <%= select_tag "invested_in", "<option>Monthly Finance</option><option>Monthly Interest</option><option>Daily Finance</option><option>Daily Interest</option>".html_safe %> </div>
+  </div>
+
+<div class="actions">
+    <%= f.submit "Create Investment", :class => "submit-button" %>
+</div>
+
+<% end %>
+<br/><br/>
+

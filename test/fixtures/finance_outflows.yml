@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  amount: MyString
+  credited_from: MyString
+  income_type: MyString
+
+two:
+  amount: MyString
+  credited_from: MyString
+  income_type: MyString

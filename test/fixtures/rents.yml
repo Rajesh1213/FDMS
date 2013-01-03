@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  security_doc_1: MyString
+  security_doc_2: MyString
+  security_doc_3: MyString
+  security_doc_4: MyString
+  signed_contract_date: 2012-08-14 11:19:12
+  contract_period: MyString
+  contract_expiry_date: 2012-08-14 11:19:12
+  reneval_contract_date: 2012-08-14 11:19:12
+  address: MyText
+  phone: MyString
+  mobile: MyString
+  description: MyText
+
+two:
+  user_id: 1
+  security_doc_1: MyString
+  security_doc_2: MyString
+  security_doc_3: MyString
+  security_doc_4: MyString
+  signed_contract_date: 2012-08-14 11:19:12
+  contract_period: MyString
+  contract_expiry_date: 2012-08-14 11:19:12
+  reneval_contract_date: 2012-08-14 11:19:12
+  address: MyText
+  phone: MyString
+  mobile: MyString
+  description: MyText

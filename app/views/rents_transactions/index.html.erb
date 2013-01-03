@@ -1,0 +1,33 @@
+<h1>Listing rents_transactions</h1>
+
+<table>
+  <tr>
+    <th>Rent amount</th>
+    <th>Due date</th>
+    <th>Paid date</th>
+    <th>Month</th>
+    <th>Next due date</th>
+    <th>Paid amount</th>
+    <th>Bal amount</th>
+    <th>Collected by</th>
+    <th>Rent</th>
+  </tr>
+
+<% @rents_transactions.each do |rents_transaction| %>
+  <tr>
+    <td><%= rents_transaction.rent_amount %></td>
+    <td><%= rents_transaction.due_date %></td>
+    <td><%= rents_transaction.paid_date %></td>
+    <td><%= rents_transaction.month %></td>
+    <td><%= rents_transaction.next_due_date %></td>
+    <td><%= rents_transaction.paid_amount %></td>
+    <td><%= rents_transaction.bal_amount %></td>
+    <td><%= rents_transaction.collected_by %></td>
+    <td><%= rents_transaction.rent_id %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Rents transaction', new_rents_transaction_path %>

@@ -1,0 +1,44 @@
+<style>.box{width: 750px;margin: 0px auto;}</style>
+<div id="content-header">
+  <%= image_tag 'home.png' %>	
+  <h1> Welcome </h1>
+  <h3> Monthly Finance Management System </h3>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to " My Profile ", :controller => "customers", :action => "my_profile" %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+    
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'New Finance', new_monthly_finance_path %></div>
+        <div class="link-descr">Issue New Monthly Finance</div>
+      </div>
+
+      <!-- <div class="link-box">
+        <div class="link-heading"><%= link_to 'Managing Directors', m_directors_path %></div>
+        <div class="link-descr"> Manage MD's Info</div>
+      </div>
+   
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Partners', partners_path %></div>
+        <div class="link-descr">Manage Partners Info</div>
+      </div>
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to ' Monthly Finance Investments ', monthly_f_investments_path %></div>
+        <div class="link-descr"> Add/Manage New Monthly Finance Investments </div>
+      </div>
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to ' Monthly Finance Transactions ', transactions_path %></div>
+        <div class="link-descr"> Track Monthly Finance Transactions </div>
+      </div> -->
+
+  </div>
+ </div>		

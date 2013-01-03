@@ -1,0 +1,2 @@
+module FinanceOutflowsHelper
+end

@@ -1,0 +1,40 @@
+<div id="content-header">
+  <%= image_tag 'home.png' %> 
+  <h1> Welcome </h1>
+  <h3> Financial Data Management System </h3>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'New Finance inflow', new_finance_inflow_path %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">     
+<table class="table table-bordered">
+  <tr>
+    <td>S.no </td>
+    <th>Amount</th>
+    <th>Debited from</th>
+    <th>Income type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% i = 0 %>
+<% @finance_inflows.each do |finance_inflow| %>
+  <tr>
+    <td><%= i = i.next %></td>
+    <td>Rs. <%= finance_inflow.amount %></td>
+    <td><%= finance_inflow.debited_from %></td>
+    <td><%= finance_inflow.income_type %></td>
+    <td><%= link_to 'Show', finance_inflow %></td>
+    <td><%= link_to 'Edit', edit_finance_inflow_path(finance_inflow) %></td>
+    <td><%= link_to 'Destroy', finance_inflow, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+</div>

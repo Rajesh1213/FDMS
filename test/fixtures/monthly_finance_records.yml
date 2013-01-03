@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  monthly_finance_id: 1
+  due_date: 
+  payment_date: 2012-08-04 14:49:20
+  user_id: 
+
+two:
+  monthly_finance_id: 1
+  due_date: 
+  payment_date: 2012-08-04 14:49:20
+  user_id: 

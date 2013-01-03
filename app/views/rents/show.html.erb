@@ -1,0 +1,70 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @rent.user_id %>
+</p>
+
+<p>
+  <b>Security doc 1:</b>
+  <%= @rent.security_doc_1 %>
+</p>
+
+<p>
+  <b>Security doc 2:</b>
+  <%= @rent.security_doc_2 %>
+</p>
+
+<p>
+  <b>Security doc 3:</b>
+  <%= @rent.security_doc_3 %>
+</p>
+
+<p>
+  <b>Security doc 4:</b>
+  <%= @rent.security_doc_4 %>
+</p>
+
+<p>
+  <b>Signed contract date:</b>
+  <%= @rent.signed_contract_date %>
+</p>
+
+<p>
+  <b>Contract period:</b>
+  <%= @rent.contract_period %>
+</p>
+
+<p>
+  <b>Contract expiry date:</b>
+  <%= @rent.contract_expiry_date %>
+</p>
+
+<p>
+  <b>Reneval contract date:</b>
+  <%= @rent.reneval_contract_date %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @rent.address %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @rent.phone %>
+</p>
+
+<p>
+  <b>Mobile:</b>
+  <%= @rent.mobile %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @rent.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_rent_path(@rent) %> |
+<%= link_to 'Back', rents_path %>

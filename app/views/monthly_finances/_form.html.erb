@@ -1,0 +1,161 @@
+<style>
+.success-message{background: #fff1ab; border: 1px solid #efdc86; padding: 5px; text-align: center;
+margin-bottom: 5px; }
+</style>
+<script>
+$jq = jQuery.noConflict();
+   $jq(document).ready(function() {
+   $jq('#monthly_finance_payment_months').keyup(function(){
+      loan = $jq('#monthly_finance_loan_amount').val() 
+      payment_days = $jq('#monthly_finance_payment_months').val()
+      percent = (($jq('#monthly_finance_loan_amount').val() *
+                  $jq('#monthly_finance_interest_percent').val()) /100 )
+      total =  ( (parseInt(percent) * parseInt(payment_days) ) + parseInt(loan) )
+      $jq('#monthly_finance_main_balance').val(total)
+      $jq('#monthly_finance_monthly_inst').val( parseInt(total) / parseInt(payment_days) )
+      $jq('#monthly_finance_loan_status').val('active');
+   });
+
+    $jq('#monthly_finance_processing_fee').keyup(function() {
+      $jq('#monthly_finance_amount_recieved').val( 
+           ($jq('#monthly_finance_loan_amount').val() - 
+            
+            ( ($jq('#monthly_finance_loan_amount').val() *
+              $jq('#monthly_finance_processing_fee').val())/100)
+           )
+        );
+      $jq('#monthly_finance_cleared_balance').val('0')
+    });
+
+  });   
+</script>
+
+<%= form_for(@monthly_finance) do |f| %>
+  <% if @monthly_finance.errors.any? %>
+    <div id="error_explanation" class="errorExplanation">
+      <h2><%= pluralize(@monthly_finance.errors.count, "error") %> prohibited this monthly_finance from being saved:</h2>
+
+      <ul>
+      <% @monthly_finance.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+     <% unless @customer.nil? or @customer.blank? %>
+   <div class="customer_details" style="margin-bottom: 60px;">
+     <div class="label-field-pair">
+       <label><%= image_tag @customer.image_url.to_s, :size => '75x75' %></label>
+      <label> <%= @customer.first_name %> <%= @customer.middle_name %> <%= @customer.last_name %>
+        <br/> Phone: <%= @customer.phone1 %> , <%= @customer.phone2 %>  
+      </label>
+  </div>
+   </div>
+   <% end %>
+  
+  
+  <div class="label-field-pair">
+    <label> Select Partner <span class="necessary-field">*</span> </label>
+    <div class="text-input-bg"> <%= f.select 'partner_id', options_for_select(@partners.collect{ |u| [u.first_name + ' ' + u.last_name + '- ('+ u.unique_id + ')', u.id] }), :prompt => "Select a Partner" %> </div>
+  </div>
+
+  <div class="label-field-pair">
+    <label> Customer Acc No. <span class="necessary-field">*</span> </label>
+    <% if @customer.nil? %>
+   
+    <%= image_tag("loader.gif",
+      :align => "absmiddle",
+      :border => 0,
+      :id => "loader",
+      :style =>"display: none; float :right;" ) %>
+          
+      <div class="text-input-bg"><%= text_field_tag "query", params[:query], :autocomplete => 'off', :placeholder =>"Enter Account Number" %></div>
+            
+      <div id="page-yield">
+        <%= observe_field 'query', :frequency => 1.0,
+          :update => 'user_information',
+          :url => { :action => 'search_customer' },
+          :before => "Element.show('loader')",
+          :success => "Element.hide('loader')",
+          :with => 'query' %>
+      </div>
+    <div id="account_id" style="display:none;"></div>  
+    <% else %>
+    <%= f.text_field :customer_id , :value => @customer.account_number %>
+    <% end %>
+  </div>
+
+  <div id="account_info"> </div>
+
+  <div class="label-field-pair">
+    <label> Loan Name <span class="necessary-field">*</span> </label>
+    <%= f.text_field :loan_name, :value => @mfinance_name %>
+  </div>
+  <div class="label-field-pair">
+    <label> Loan Amount (Rs.) <span class="necessary-field">*</span>  </label>
+    <%= f.text_field :loan_amount %>
+  </div>
+  <div class="label-field-pair">
+    <label> Interest Percent (%) <span class="necessary-field">*</span> </label>
+    <%= f.text_field :interest_percent %> %
+  </div>
+
+  <br/>
+  <div class="label-field-pair">
+    <label> Date of issue <span class="necessary-field">*</span> </label>
+    <%= f.calendar_date_select :date_of_issue, :value => Date.today.to_date %>
+  </div>
+  <div class="label-field-pair">
+    <label> payment months <span class="necessary-field">*</span> </label>
+    <%= f.text_field :payment_months %>
+  </div>
+  <div class="label-field-pair">
+    <label> Due date <span class="necessary-field">*</span> </label>
+    <%= f.calendar_date_select :due_date %>
+  </div>
+  <br/>
+  <div class="label-field-pair">
+    <label> Processing fee <span class="necessary-field">*</span></label> 
+    <%= f.text_field :processing_fee %> %
+  </div>
+  <div class="label-field-pair">
+    <label> Customer Recieved (Rs.)  <span class="necessary-field">*</span> </label>
+    <%= f.text_field :amount_recieved %> 
+  </div>
+  <div class="label-field-pair">
+    <label> Main Balance (Rs.) <span class="necessary-field">*</span> </label>
+    <%= f.text_field :main_balance %> 
+  </div>
+  <div class="label-field-pair">
+    <label> Monthly Installment (Rs.) <span class="necessary-field">*</span></label>
+    <%= f.text_field :monthly_inst %> %
+  </div>
+  <div class="label-field-pair" style="display: none;">
+    <%= f.label :loan_status %>
+    <%= f.text_field :loan_status %>
+  </div>
+  <br/>
+
+  <div class="success-message">  Please Upload Scanned Security Documents * </div>
+    <div class="label-field-pair">
+    <%= f.label :security_doc_1 %>
+    <%= f.file_field :security_doc_1 %>
+  </div>
+     <div class="label-field-pair">
+    <%= f.label :security_doc_2 %>
+    <%= f.file_field :security_doc_2 %>
+  </div>
+     <div class="label-field-pair">
+    <%= f.label :security_doc_3 %>
+    <%= f.file_field :security_doc_3 %>
+  </div>
+     <div class="label-field-pair">
+    <%= f.label :security_doc_4 %>
+    <%= f.file_field :security_doc_4 %>
+  </div>
+  <br/>
+  <div class="actions">
+    <%= f.submit :class=> "submit-button" %>
+  </div>
+<% end %>

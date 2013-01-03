@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Customer:</b>
+  <%= @daily_finance.customer_id %>
+</p>
+
+<p>
+  <b>Loan name:</b>
+  <%= @daily_finance.loan_name %>
+</p>
+
+
+
+<p>
+  <b>Loan amount:</b>
+  <%= @daily_finance.loan_amount %>
+</p>
+
+<p>
+  <b>Date of issue:</b>
+  <%= @daily_finance.date_of_issue %>
+</p>
+
+<p>
+  <b>Payment days:</b>
+  <%= @daily_finance.payment_days %>
+</p>
+
+<p>
+  <b>Agreement date:</b>
+  <%= @daily_finance.agreement_date %>
+</p>
+
+<p>
+  <b>Due date:</b>
+  <%= @daily_finance.due_date %>
+</p>
+
+<p>
+  <b>Interest percent:</b>
+  <%= @daily_finance.interest_percent %>
+</p>
+
+<p>
+  <b>Amount recieved:</b>
+  <%= @daily_finance.amount_recieved %>
+</p>
+
+<p>
+  <b>Main balance:</b>
+  <%= @daily_finance.main_balance %>
+</p>
+
+<p>
+  <b>Cleared balance:</b>
+  <%= @daily_finance.cleared_balance %>
+</p>
+
+<p>
+  <b>Loan status:</b>
+  <%= @daily_finance.loan_status %>
+</p>
+
+
+<%= link_to 'Edit', edit_daily_finance_path(@daily_finance) %> |
+<%= link_to 'Back', daily_finances_path %>

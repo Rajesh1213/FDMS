@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  m_director_id: 1
+  partner_id: 1
+  investment_amount: MyString
+  is_active: false
+  is_deleted: false
+
+two:
+  m_director_id: 1
+  partner_id: 1
+  investment_amount: MyString
+  is_active: false
+  is_deleted: false

@@ -1,0 +1,49 @@
+<%= form_for(@add_property) do |f| %>
+  <% if @add_property.errors.any? %>
+    <div id="error_explanation" class="errorExplanation">
+      <h2><%= pluralize(@add_property.errors.count, "error") %> prohibited this add_property from being saved:</h2>
+
+      <ul>
+      <% @add_property.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+   <div class="label-field-pair">
+    <%= f.label :area %>
+    <%= f.text_field :area %>
+  </div>
+  <div class="label-field-pair">
+    <label> Proprety Type <span class="necessary-field">*</span> </label>
+    <div class="text-input-bg"><%= f.select :property_type, options_for_select([["Single", "single"], ["2BHK", "2BHK"],["3BHK", "3BHK"],["Duplex", "duplex"],["Triplex", "triplex"],["Commercial", "commercial"],["Student Housing", "student housing"]]) %> </div>
+  </div>
+   <div class="label-field-pair">
+    <%= f.label :house_number %>
+    <%= f.text_field :house_number %>
+  </div>
+   <div class="label-field-pair-text-area">
+     <label for="address"> Address </label>
+    <div class="textarea-input-bg"><%= f.text_area :street_address ,:cols => 27, :rows => 5 %></div>
+  </div>
+   <div class="label-field-pair">
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :pincode %>
+    <%= f.number_field :pincode %>
+  </div>
+   <div class="label-field-pair">
+    <%= f.label :state %>
+    <%= f.text_field :state %>
+  </div>
+   <div class="label-field-pair">
+    <%= f.label :country %>
+    <%= f.text_field :country %>
+  </div>
+ <div class="actions">
+    <%= f.submit :class=> "submit-button" %>
+  </div>
+<% end %>

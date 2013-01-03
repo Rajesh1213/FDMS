@@ -1,0 +1,57 @@
+<%= form_for(@mi_transaction) do |f| %>
+  <% if @mi_transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mi_transaction.errors.count, "error") %> prohibited this mi_transaction from being saved:</h2>
+
+      <ul>
+      <% @mi_transaction.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tran_date %><br />
+    <%= f.datetime_select :tran_date %>
+  </div>
+  <div class="field">
+    <%= f.label :tran_id %><br />
+    <%= f.text_field :tran_id %>
+  </div>
+  <div class="field">
+    <%= f.label :particulars %><br />
+    <%= f.text_field :particulars %>
+  </div>
+  <div class="field">
+    <%= f.label :debit %><br />
+    <%= f.text_field :debit %>
+  </div>
+  <div class="field">
+    <%= f.label :credit %><br />
+    <%= f.text_field :credit %>
+  </div>
+  <div class="field">
+    <%= f.label :balance %><br />
+    <%= f.text_field :balance %>
+  </div>
+  <div class="field">
+    <%= f.label :opening_balance %><br />
+    <%= f.text_field :opening_balance %>
+  </div>
+  <div class="field">
+    <%= f.label :closing_balance %><br />
+    <%= f.text_field :closing_balance %>
+  </div>
+  <div class="field">
+    <%= f.label :monthly_f_investment_id %><br />
+    <%= f.number_field :monthly_f_investment_id %>
+  </div>
+  <div class="field">
+    <%= f.label :monthly_interest_id %><br />
+    <%= f.number_field :monthly_interest_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

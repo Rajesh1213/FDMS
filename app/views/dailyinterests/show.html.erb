@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @dailyinterest.user_id %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%= @dailyinterest.customer_id %>
+</p>
+
+<p>
+  <b>Loan amount:</b>
+  <%= @dailyinterest.loan_amount %>
+</p>
+
+<p>
+  <b>Interest per day:</b>
+  <%= @dailyinterest.interest_per_day %>
+</p>
+
+<p>
+  <b>Date of issue:</b>
+  <%= @dailyinterest.date_of_issue %>
+</p>
+
+<p>
+  <b>Due closing date:</b>
+  <%= @dailyinterest.due_closing_date %>
+</p>
+
+<p>
+  <b>Total interest:</b>
+  <%= @dailyinterest.total_interest %>
+</p>
+
+<p>
+  <b>Tatal paid:</b>
+  <%= @dailyinterest.tatal_paid %>
+</p>
+
+
+<%= link_to 'Edit', edit_dailyinterest_path(@dailyinterest) %> |
+<%= link_to 'Back', dailyinterests_path %>

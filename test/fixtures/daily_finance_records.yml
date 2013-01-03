@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  daily_finance_id: 1
+  due_date: 2012-07-21 12:12:25
+  payment_date: 2012-07-21 12:12:25
+  cash_recieved_by: 
+
+two:
+  daily_finance_id: 1
+  due_date: 2012-07-21 12:12:25
+  payment_date: 2012-07-21 12:12:25
+  cash_recieved_by: 

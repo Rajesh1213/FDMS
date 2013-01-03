@@ -1,0 +1,108 @@
+
+<div id="content-header">
+  <%= image_tag 'home.png' %> 
+  <h1> Customers </h1>
+  <h3> Customer Details  </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+<% unless @customer.nil? or @customer.blank? %>
+<div id="nav">
+  <ul>
+    <% if can? :read, DailyFinance %>
+    <li style="width: 100px;"><%= link_to 'Daily Finance' , :controller => 'daily_finances', :action => 'new' , :id => @customer.id %></li>
+    <li> <%= link_to 'Monthly Finance' , :controller => 'monthly_finances', :action => 'new' , :id => @customer.id %> </li>
+    <li> <%= link_to 'Daily Interest' , :controller => 'dailyinterests', :action => 'new' , :id => @customer.id %> </li>
+    <li> <%= link_to 'Monthly Interest' , :controller => 'monthly_interests', :action => 'new' , :id => @customer.id %> </li>
+    <% end %>
+  </ul>
+</div>    
+<% end %>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %><br/>
+  <div class="box">
+ 
+ <% unless @customer.nil? or @customer.blank? %>
+
+<div id="student_profile_heading">
+  <div id="profile_picture_display"> <%= image_tag @customer.image_url.to_s, :size => '150x150' %>  </div>
+  <div id="student_main_info">  
+     <h3> Account Number:  <%= @customer.account_number %> </h3>
+     <h4> Full Name: <%= @customer.first_name %> <%= @customer.middle_name %>  <%= @customer.last_name %> </h4>
+      <h4> Mobile: <%= @customer.phone1 %> , <%= @customer.phone2 %> </h4>
+  </div>
+<div class="extender"/>
+</div>
+
+<div class="all-loan-info" style="width: 700px">
+<br/> 
+<div class="loan-info" style=" margin-left:95px;">
+  <div class="loan-head">Loans taken</div>
+   <div class="loan-count"> 
+    
+     <% if @customer.loans_taken.nil?  %>
+        0
+     <% else %>
+         <%= link_to @customer.loans_taken, :controller => "customers", :action => "loans_taken", :id => @customer.id %>
+     <% end %>
+   </div> 
+</div>
+
+<div class="loan-info">
+  <div class="loan-head">Loans cleared</div>
+  <div class="loan-count">
+      <% if @customer.loans_cleared.nil? %>
+       0
+     <% else %>
+        <%= @customer.loans_cleared %>
+     <% end %>
+  </div> 
+</div>
+
+<div class="loan-info">
+  <div class="loan-head">Loans uncleared</div>
+  <div class="loan-count"> 
+   <% if @customer.loans_uncleared.nil? %>
+       0
+     <% else %>
+        <%= @customer.loans_uncleared %>
+     <% end %>
+  </div>   
+</div>
+<br/>
+
+</div>
+
+<div class="clearfix"> </div>
+
+<div id="new_profile_info_top">
+  <table width="700">
+    <tbody>
+      <tr class="odd left"> <td>First Name: </td> <td class="right">  <%= @customer.first_name %> </td> </tr>
+      <tr class="even left"> <td>Middle Name: </td> <td class="right"> <%= @customer.middle_name %> </td> </tr>
+      <tr class="odd left"> <td>Last Name: </td> <td class="right"> <%= @customer.last_name %> </td> </tr>
+      <tr class="even left"> <td>Reference Person: </td> <td class="right"> <%= @customer.reference_person %> </td>
+      </tr>
+      <tr class="odd left"> <td> Address: </td> <td class="right"> <%= @customer.address %> </td> </tr>  
+      <tr class="odd left"> <td> Email: </td> <td class="right"> <%= @customer.customer_email %> </td> </tr>  
+      <tr class="odd left"> <td> Remarks: </td> <td class="right"> <%= @customer.customer_remarks %> </td> </tr>
+    </tbody>
+  </table> 
+</div>
+
+
+<%= link_to 'Edit', edit_customer_path(@customer), :class => "submit-button" %> 
+<%= link_to 'Back', customers_path, :class => "submit-button" %>
+
+<% else %>
+<div id="new_profile_info_top">
+<h4> no results found </h4>
+</div>
+<% end %>
+
+</div>
+</div>
+
+

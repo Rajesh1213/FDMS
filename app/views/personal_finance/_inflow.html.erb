@@ -1,0 +1,21 @@
+
+<%= link_to 'Add Inflow', new_finance_inflow_path %>
+<table id="listing" cellpadding="1" cellspacing="1" border="1" style="bordercolor:#ccc;" >
+  <tr class="tr-head" >
+    <td>S.no </td>
+    <th>Amount</th>
+    <th>Debited from</th>
+    <th>Income type</th>
+    <th>Created at</th>
+  </tr>
+<% i = 0 %>
+<% @finance_inflows.each do |finance_inflow| %>
+  <tr  class="tr-<%= cycle('odd', 'even') %>" >
+    <td><%= i = i.next %></td>
+    <td>Rs. <%= finance_inflow.amount %></td>
+    <td><%= finance_inflow.debited_from %></td>
+    <td><%= finance_inflow.income_type %></td>
+    <td><%= finance_inflow.created_at.strftime("%d-%m-%Y")%></td>
+  </tr>
+<% end %>
+</table>

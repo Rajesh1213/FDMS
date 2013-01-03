@@ -1,0 +1,53 @@
+<%= form_for(@rents_transaction) do |f| %>
+  <% if @rents_transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rents_transaction.errors.count, "error") %> prohibited this rents_transaction from being saved:</h2>
+
+      <ul>
+      <% @rents_transaction.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :rent_amount %><br />
+    <%= f.text_field :rent_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :due_date %><br />
+    <%= f.datetime_select :due_date %>
+  </div>
+  <div class="field">
+    <%= f.label :paid_date %><br />
+    <%= f.datetime_select :paid_date %>
+  </div>
+  <div class="field">
+    <%= f.label :month %><br />
+    <%= f.text_field :month %>
+  </div>
+  <div class="field">
+    <%= f.label :next_due_date %><br />
+    <%= f.datetime_select :next_due_date %>
+  </div>
+  <div class="field">
+    <%= f.label :paid_amount %><br />
+    <%= f.text_field :paid_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :bal_amount %><br />
+    <%= f.text_field :bal_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :collected_by %><br />
+    <%= f.text_field :collected_by %>
+  </div>
+  <div class="field">
+    <%= f.label :rent_id %><br />
+    <%= f.number_field :rent_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

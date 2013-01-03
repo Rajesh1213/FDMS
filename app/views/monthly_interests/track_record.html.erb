@@ -1,0 +1,108 @@
+<style>
+.l-tr-de,.r-tr-de{width: 350px;font-size: 16px;color: #333;padding: 5px;}
+.l-tr{float:left;}
+.r-tr{float: left;}
+#box{padding: 10px ; background : yellow;}
+.success-message{background: #fff1ab; border: 1px solid #efdc86; padding: 10px; text-align: center;
+margin-bottom: 10px; }
+</style>
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+      $('a[rel*=facebox]').facebox({
+        loadingImage : '../src/loading.gif',
+        closeImage   : '../src/closelabel.png'
+      })
+    })
+  </script>
+
+<div id="content-header">
+  <%= image_tag @customer.image_url.to_s, :size => '75x75' %>
+  <h1> <%= @customer.first_name %> <%= @customer.middle_name %> <%= @customer.last_name %> </h1>
+  <h3> Loan Name : <%= @monthly_interest.loan_name %>  Details </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li>link</li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+  
+  
+  <% if @monthly_interest.total_interest == @monthly_interest.total_paid %>
+  <div class="success-message"> <h4> Loan Amount Cleared Send For Approval </h4> </div>
+   <% end %> 
+
+     <div class="loan-details-track">
+  <div class="l-tr">
+
+    <div class="l-tr-de"> <strong> Loan Amount: </strong>  Rs.<%= number_to_currency(@monthly_interest.loan_amount, :unit => " ") %> /-  </div>
+    <div class="l-tr-de"> <strong> Issue Date: </strong> <%= @monthly_interest.date_of_issue.strftime("%d-%m-%Y")%> </div>
+  </div>
+  <div class="r-tr">
+    <div class="r-tr-de"><strong> Total Amount Paid: </strong>Rs. <%= number_to_currency( @monthly_interest.total_interest , :unit => "" ) %> /-  <%= %> </div>
+    <div class="r-tr-de"><strong> Total Amount Cleared: </strong>Rs. <%= number_to_currency(
+     @monthly_interest.total_paid, :unit => "") %> /-  </div>
+  </div>
+  </div>
+  
+ <div class="clearfix"> </div>  
+ <table  id="listing" class="books_listing_table" align="center" width="100%" cellpadding="1" cellspacing="1">
+<thead>
+  <tr class="tr-head">
+    <th class="colPosition">S.no</th>
+    <th class="colPosition">Loan Name</th>
+    <th class="colPosition">Daily Amount</th>
+    <th class="colPosition">Status</th>
+    <th class="colPosition">Payment Date</th>
+    <th class="colPosition">Payment Recieved by</th>
+    <th class="colPosition">Pay </th>
+  </tr>
+</thead>
+<% i = 1 %>
+<% @track_record.each do |record| %>
+  <tr class="tr-<%= cycle('odd', 'even') %>">
+    <td><%= i %></td>
+    <td><%= record.monthly_interest.loan_name %></td>
+    <td> Rs. <%= number_to_currency( @amount, :unit => "")  %> /- </td>
+
+     <% if record.payment_date.nil? %>
+        <td style ="color: orange"> Due </td>
+     <% else %>
+        <td style="color: green"> Paid </td>
+     <% end %>
+
+     <% if record.payment_date.nil? %>
+       <td>-</td>
+     <% else %>
+       <td style="color: green"> <%= record.payment_date.strftime("%d-%m-%Y")%> </td>
+     <% end %>
+      
+     <% if record.user_id.nil? %> 
+      <td> - </td>
+     <% else %>
+      <td> <%=  User.find(record.user_id).email  %> </td>
+     <% end %>
+      <td style ="text-align: center;">
+        <% if record.payment_date.nil? %>
+          <%= link_to_remote "Make Payment",
+             :url => { :action => "make_payment", :id => record.id, :sno => i },:confirm => "Are you sure? Make this payment? ", :method => "get" %>
+         <% else %>
+            - - -
+         <% end %>
+      </td>
+   <% i = i.next %>
+<% end %>
+</table>
+
+<div id="modal-box" style="display:none;"></div>
+   
+</div>
+</div>

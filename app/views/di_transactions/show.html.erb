@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tran date:</b>
+  <%= @di_transaction.tran_date %>
+</p>
+
+<p>
+  <b>Tran:</b>
+  <%= @di_transaction.tran_id %>
+</p>
+
+<p>
+  <b>Particulars:</b>
+  <%= @di_transaction.particulars %>
+</p>
+
+<p>
+  <b>Debit:</b>
+  <%= @di_transaction.debit %>
+</p>
+
+<p>
+  <b>Credit:</b>
+  <%= @di_transaction.credit %>
+</p>
+
+<p>
+  <b>Balance:</b>
+  <%= @di_transaction.balance %>
+</p>
+
+<p>
+  <b>Opening balance:</b>
+  <%= @di_transaction.opening_balance %>
+</p>
+
+<p>
+  <b>Closing balance:</b>
+  <%= @di_transaction.closing_balance %>
+</p>
+
+<p>
+  <b>Monthly f investment:</b>
+  <%= @di_transaction.monthly_f_investment_id %>
+</p>
+
+<p>
+  <b>Dailyinterest:</b>
+  <%= @di_transaction.dailyinterest_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_di_transaction_path(@di_transaction) %> |
+<%= link_to 'Back', di_transactions_path %>

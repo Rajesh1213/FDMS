@@ -1,0 +1,31 @@
+<style>
+.box{
+    width: 500px;
+    margin: 0px auto;
+}
+</style>
+
+
+<div id="content-header">
+  <%= image_tag('users-icon.jpeg') %>
+  <h1> Daily Finance </h1>
+  <h3> Issue New Daily Finance </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to "Add New Customer", :controller => "customers", :action => "new" %></li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
+  <div class="box">
+
+<%= render 'form' %>
+
+</div>
+</div>

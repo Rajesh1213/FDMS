@@ -1,0 +1,2 @@
+module AddPropertiesHelper
+end

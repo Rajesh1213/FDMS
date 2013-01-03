@@ -1,0 +1,29 @@
+#content-header
+	=image_tag 'home.png' 
+	%h1 Welcome 
+	%h3 Financial Data Management System
+
+#inner-tab-menu
+	%ul
+		%li
+			= link_to " My Profile ", polymorphic_path([:customers, :my_profile])
+
+#page-yield
+	-unless flash[:notice].nil? 
+		%p.flash-msg
+			= flash[:notice] 
+.box
+	.link-box
+		.link-heading
+			= link_to 'Income', polymorphic_path([:finance_inflows])
+		.link-descr Finance/Money In Flow
+
+	.link-box
+		.link-heading
+			= link_to 'Expenses', polymorphic_path([:finance_outflows])
+		.link-descr Finance/Money Out Flow
+
+	.link-box
+		.link-heading
+			= link_to 'Transaction Balance sheet ', polymorphic_path([:personal_finance, :balance_sheet])
+		.link-descr Issue/Pay Daily Finance

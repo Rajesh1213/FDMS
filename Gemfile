@@ -16,6 +16,7 @@ gem 'rails', '3.2.6'
  gem 'will_paginate', '~> 3.0'
  gem 'prototype_legacy_helper', '0.0.0', :git => 'git://github.com/rails/prototype_legacy_helper.git'
  gem 'wkhtmltopdf'
+ gem 'haml'
  # gem 'pdfkit'
  # gem 'wkhtmltopdf-binary'
  

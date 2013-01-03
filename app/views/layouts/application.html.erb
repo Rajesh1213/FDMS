@@ -89,7 +89,7 @@
           <li><%= link_to 'Managing Directors', m_directors_path %></li>
           <li><%= link_to 'Partners', partners_path %></li>
           <li><%= link_to 'Investments', monthly_f_investments_path %></li>
-          <li><%= link_to 'Transactions', transactions_path %></li>
+          <li><%= link_to 'Transactions', polymorphic_path([:home, :transactions]) %></li>
         </ul>
       </li> 
       <li>

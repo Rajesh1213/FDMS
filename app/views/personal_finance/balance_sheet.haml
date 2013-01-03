@@ -1,0 +1,30 @@
+%style
+  :plain
+    .div_inflow {float:left; width:450px; margin:10px 0px 0px 10px;}
+    .outflow {float: right; width: 450px; margin: 10px 0px 0px 10px;}
+#content-header
+  =image_tag 'home.png'
+  %h1 Welcome
+  %h3 Financial Data Management System Personal Module
+
+#inner-tab-menu
+  %ul
+    %li
+      =link_to " My Profile ", polymorphic_path([:customers, :my_profile])
+
+#page-yield
+  -unless flash[:notice].nil? 
+    %p.flash-msg
+      = flash[:notice]
+
+%div{:style => 'text-align:center; margin:5px; border:1px solid #e5e5e5;'}
+  Total Balance: Rs.
+.main_balance
+
+.div_inflow
+  %div Total Income = Rs. 
+  = render :partial => 'inflow'
+
+.outflow
+  %div Total Expenditure
+  = render :partial => 'outflow'

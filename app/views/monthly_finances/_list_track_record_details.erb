@@ -1,0 +1,120 @@
+<% if @mfinance.main_balance == @mfinance.cleared_balance %>
+  <div class="success-message"> <h4> Loan Amount Cleared Send For Approval </h4> </div>
+   <% end %> 
+
+  <div class="loan-details-track">
+  <div class="l-tr">
+    <div class="l-tr-de"> 
+      <strong> Loan Amount: </strong>  
+      Rs.<%= @mfinance.main_balance %> /- 
+     </div>
+    <div class="l-tr-de"> 
+      <strong> Issue Date: </strong>
+      <%= @mfinance.date_of_issue.strftime("%d-%m-%Y")%> 
+    </div>
+    <div class="l-tr-de"> 
+      <strong> Due Date: </strong> 
+      <%= @mfinance.due_date.strftime("%d-%m-%Y")%> 
+    </div>
+  </div>
+  
+  <div class="r-tr">
+    <div class="r-tr-de">
+      <strong> Balance Amount: </strong>
+       Rs. <%=  (@mfinance.main_balance.to_i - @mfinance.cleared_balance.to_i)  %> /-  <%= %> 
+     </div>
+    <div class="r-tr-de">
+      <strong> Cleared Amount: </strong>
+      Rs. <%= @mfinance.cleared_balance %> /-  
+    </div>
+    <div class="r-tr-de">
+      <strong> Monthly Installment: </strong>
+      Rs. <%= @mfinance.monthly_inst %> /-  
+    </div>
+  </div>
+  </div>
+
+<div class="clearfix"> </div> <br/>
+  <div class ="security-documents">
+     <label> 
+      <strong> Security Documents Recieved : </strong> 
+      <% if @mfinance.security_doc_1.blank? and @mfinance.security_doc_2.blank? and @mfinance.security_doc_3.blank? and @mfinance.security_doc_4.blank?  %> 
+       <label style="color:#ff534e"> No Security Documents Recieved  <red> * </red> </label>
+       <% end %>
+      </label>
+  <ul>
+    <li> 
+      <%= link_to @mfinance.security_doc_1, @mfinance.security_doc_1_url if @mfinance.security_doc_1? %> 
+    </li>
+    <li> 
+      <%= link_to @mfinance.security_doc_2, @mfinance.security_doc_2_url if @mfinance.security_doc_2? %> 
+    </li> 
+  </div>
+   
+ <div class="clearfix"> </div>
+ <table   class=" table  table-striped table-condensed table-bordered"  align="center" width="100%" cellpadding="1" cellspacing="1">
+<thead>
+  <tr class="tr-head">
+    <th class="colPosition">S.no</th>
+    <th class="colPosition">Due Date</th>
+    <th class="colPosition">Payment Date</th>
+    <th class="colPosition">Monthly Cash</th>
+    <th class="colPosition">Status</th>
+    <th class="colPosition">Balance</th>
+    <th class="colPosition"> Penalty </th>
+    <th class="colPosition">Payment Recieved by</th>
+    <th class="colPosition">Pay </th>
+  </tr>
+</thead>
+<% i = 1 %>
+<% @track_record.each do |record| %>
+  <tr class="tr-<%= cycle('odd', 'even') %>">
+    <td><%= i %></td>
+    <td><%= record.due_date.strftime("%d-%m-%Y") %></td>
+
+     <% if record.payment_date.nil? %>
+       <td>-</td>
+     <% else %>
+       <td style="color: green"> <%= record.payment_date.strftime("%d-%m-%Y")%> </td>
+     <% end %>
+
+    <% if record.payment_date.nil? %>
+        <td> - </td>
+     <% else %>
+        <td> Rs. <%= record.paid_amount  %> /-  
+         <% if record.amount.to_i - record.paid_amount.to_i != 0 %>
+          <i>( <span class="necessary-field">*</span> <%= record.amount.to_i - record.paid_amount.to_i %> )</i>
+         <% end %>
+        </td>
+     <% end %>
+
+     <% if record.payment_date.nil? %>
+        <td style ="color: orange"> Due </td>
+     <% else %>
+        <td style="color: green"> Paid </td>
+     <% end %>
+     
+     <% if record.balance_amount.nil? or record.balance_amount.blank? %>
+     <td> -  </td>
+     <% else %>
+     <td> Rs. <%= record.balance_amount %> /- </td>
+     <% end %>
+
+     <td> <%= record.penalty %>  </td>
+  
+     <% if record.user_id.nil? %> 
+      <td> - </td>
+     <% else %>
+      <td> <%=  User.find(record.user_id).email  %> </td>
+     <% end %>
+      <td style ="text-align: center;">
+        <% if record.payment_date.nil? %>
+          <%= link_to_remote "Make Payment",
+             :url => { :action => "make_payment", :id => record.id, :sno => i },:confirm => "Are you sure? Make this payment? ", :method => "get" %>
+         <% else %>
+            - - -
+         <% end %>
+      </td>
+   <% i = i.next %>
+<% end %>
+</table>

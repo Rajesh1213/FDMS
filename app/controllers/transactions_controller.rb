@@ -1,8 +1,29 @@
 class TransactionsController < ApplicationController
+
+  def donwload_transaction_pdf
+    @transactions = Transaction.all
+    unless Transaction.last.nil?
+      @total = Transaction.last.closing_balance
+    end
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => "Monthly Finance Transactions"
+      end
+    end
+  end
+
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.paginate(:page => params[:page], :per_page => 15)
+    # unless params.include? 'transaction[:start_date]'
+      # @transactions = Transaction.where(:tran_date => params[:transaction][:start_date]..Time.now).paginate(:page => params[:page], :per_page => 15)
+    # else
+      @transactions = Transaction.paginate(:page => params[:page], :per_page => 15)
+    # end
+
+
     unless Transaction.last.nil?
       @total = Transaction.last.closing_balance
     end

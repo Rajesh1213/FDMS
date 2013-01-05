@@ -130,6 +130,8 @@ GEM
     whenever (0.7.3)
       activesupport (>= 2.3.4)
       chronic (~> 0.6.3)
+    wicked_pdf (0.9.0)
+      rails
     will_paginate (3.0.3)
     wkhtmltopdf (0.1.2)
 
@@ -152,5 +154,6 @@ DEPENDENCIES
   sqlite3
   uglifier (>= 1.0.3)
   whenever
+  wicked_pdf
   will_paginate (~> 3.0)
   wkhtmltopdf

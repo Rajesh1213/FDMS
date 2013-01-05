@@ -144,6 +144,18 @@ class MonthlyFinancesController < ApplicationController
     end
   end
 
+  def download_track_record_pdf
+    @mfinance = MonthlyFinance.find(params[:id])
+    @track_record = @mfinance.monthly_finance_records
+    @customer = @mfinance.customer
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => "Customer Loan Details"
+      end
+    end
+  end
+
   def track_record
     @mfinance = MonthlyFinance.find(params[:id])
     @track_record = @mfinance.monthly_finance_records

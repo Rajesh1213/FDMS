@@ -16,6 +16,8 @@ text-align:left;
 float: left;}
 .note-bal{ font-size: 12px; letter-spacing: 1px;  }
 </style>
+
+
 <div id="content-header">
   <%= image_tag('users-icon.jpeg') %>
   <h1> Company's Monthly Finance Transactions </h1>
@@ -35,13 +37,21 @@ float: left;}
   <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
   <br/>
   <div class="box">
-  <!--   <form action = "/transactions">
+    <form action = "/transactions">
       <%# CalendarDateSelect.format=(:iso_date )%>
-      <%# calendar_date_select :transaction, :start_date%>
-      <%# calendar_date_select :transaction, :end_date %>
+      <%= calendar_date_select :start_date, ""%>
+      <%= calendar_date_select :end_date, "" %>
       <input type="submit" value="Go"/>
-    </form> -->
-<div class="total-invest-info"><a href="/transactions/donwload_transaction_pdf.pdf">Download PDF</a>Closing Balance:<strong> Rs. <%= @total %>  /- </strong></div>
+    </form>
+  <div class="total-invest-info">
+    <% if params.include? "start_date" and params.include? "end_date" %>
+      <a href="/transactions/donwload_transaction_pdf.pdf?start_date=<%= params[:start_date][0] %>&end_date=<%= params[:end_date][0] %>;">Download PDF</a>
+    <% else%>
+      <a href="/transactions/donwload_transaction_pdf.pdf">Download PDF</a>
+    <% end %>
+
+    Closing Balance:<strong> Rs. <%= @total %>  /- </strong>
+  </div>
   
   <%= render :partial => "/transactions/transactions_list"%>
   

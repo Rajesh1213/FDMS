@@ -1,7 +1,15 @@
 class TransactionsController < ApplicationController
 
   def donwload_transaction_pdf
-    @transactions = Transaction.all
+    if params.include? "start_date" and params.include? "end_date" and !params["start_date"].blank? and !params["end_date"].blank? 
+      start_date = Time.parse(params[:start_date]).strftime('%y-%m-%d 00:00:00')
+      end_date = Time.parse(params[:end_date]).strftime('%y-%m-%d 23:59:00')
+
+      @transactions = Transaction.where(:tran_date => start_date..end_date).paginate(:page => params[:page], :per_page => 15)
+    else
+      @transactions = Transaction.paginate(:page => params[:page], :per_page => 15)
+    end
+
     unless Transaction.last.nil?
       @total = Transaction.last.closing_balance
     end
@@ -17,11 +25,14 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    # unless params.include? 'transaction[:start_date]'
-      # @transactions = Transaction.where(:tran_date => params[:transaction][:start_date]..Time.now).paginate(:page => params[:page], :per_page => 15)
-    # else
+    if params.include? "start_date" and params.include? "end_date" and !params["start_date"][0].blank? and !params["end_date"][0].blank? 
+      start_date = Time.parse(params[:start_date][0]).strftime('%y-%m-%d 00:00:00')
+      end_date = Time.parse(params[:end_date][0]).strftime('%y-%m-%d 23:59:00')
+
+      @transactions = Transaction.where(:tran_date => start_date..end_date).paginate(:page => params[:page], :per_page => 15)
+    else
       @transactions = Transaction.paginate(:page => params[:page], :per_page => 15)
-    # end
+    end
 
 
     unless Transaction.last.nil?

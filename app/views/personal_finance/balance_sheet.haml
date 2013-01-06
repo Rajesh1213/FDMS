@@ -6,6 +6,7 @@
   :plain
     .div_inflow {float:left; width:450px; margin:10px 0px 0px 10px;}
     .outflow {float: right; width: 450px; margin: 10px 0px 0px 10px;}
+    .total_income {text-align:center; margin:5px; border:1px solid #e5e5e5; padding: 15px; background-color: #efefef}
     a { text-decoration : none;}
 
 #content-header
@@ -23,16 +24,18 @@
     %p.flash-msg
       = flash[:notice]
 
-%div{:style => 'text-align:center; margin:5px; border:1px solid #e5e5e5; padding: 15px; background-color: #efefef'}
-  This Month's Total Income Balance (After Deducting all Expenditures): Rs.
+.total_income
   %strong
+    = Date.today().at_beginning_of_month().strftime("%B")
+    Month's Total Income Balance (After Deducting all Expenditures): Rs.
+  %strong{ :style => 'color: brown;'}
     = total_income
 
 .main_balance
 .div_inflow
   %div{:style => 'background-color: #efefef; padding: 15px; border: 1px solid #ccc;'}
     Total Income Rs:
-    %strong
+    %strong{ :style => 'color: brown;'}
       = inflow
       = link_to "Add Inflow", polymorphic_path([:new_finance_inflow]), :class => 'btn btn-info', :style => "float:right;"
   %br
@@ -41,7 +44,7 @@
 .outflow
   %div{:style => 'background-color: #efefef; padding: 15px; border: 1px solid #ccc;'}
     Total Expenditure Rs:
-    %strong
+    %strong{ :style => 'color: brown;'}
       = outflow
       = link_to "Add Outflow", polymorphic_path([:new_finance_outflow]), :class => 'btn btn-info', :style => "float:right;"
   %br

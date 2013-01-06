@@ -128,6 +128,13 @@ class RentsController < ApplicationController
     @track_record.collected_by = params[:collected_by]
     @track_record.bal_amount = @remaning_amount
     @track_record.save 
+
+    fi = FinanceInflow.new
+    fi.amount = params[:paid_amount]
+    fi.debited_from = "Rent"
+    fi.income_type = "Rent"
+    fi.save
+
   end
 
 

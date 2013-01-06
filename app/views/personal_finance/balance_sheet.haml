@@ -1,7 +1,13 @@
+-inflow ||= (@finance_inflows.map(&:amount).inject{|sum,x| sum.to_i + x.to_i}).to_i
+-outflow ||=  (@finance_outlows.map(&:amount).inject{|sum,x| sum.to_i + x.to_i}).to_i
+-total_income ||= inflow - outflow
+
 %style
   :plain
     .div_inflow {float:left; width:450px; margin:10px 0px 0px 10px;}
     .outflow {float: right; width: 450px; margin: 10px 0px 0px 10px;}
+    a { text-decoration : none;}
+
 #content-header
   =image_tag 'home.png'
   %h1 Welcome
@@ -13,18 +19,30 @@
       =link_to " My Profile ", polymorphic_path([:customers, :my_profile])
 
 #page-yield
-  -unless flash[:notice].nil? 
+  -if flash[:notice].present? 
     %p.flash-msg
       = flash[:notice]
 
-%div{:style => 'text-align:center; margin:5px; border:1px solid #e5e5e5;'}
-  Total Balance: Rs.
-.main_balance
+%div{:style => 'text-align:center; margin:5px; border:1px solid #e5e5e5; padding: 15px; background-color: #efefef'}
+  This Month's Total Income Balance (After Deducting all Expenditures): Rs.
+  %strong
+    = total_income
 
+.main_balance
 .div_inflow
-  %div Total Income = Rs. 
+  %div{:style => 'background-color: #efefef; padding: 15px; border: 1px solid #ccc;'}
+    Total Income Rs:
+    %strong
+      = inflow
+      = link_to "Add Inflow", polymorphic_path([:new_finance_inflow]), :class => 'btn btn-info', :style => "float:right;"
+  %br
   = render :partial => 'inflow'
 
 .outflow
-  %div Total Expenditure
+  %div{:style => 'background-color: #efefef; padding: 15px; border: 1px solid #ccc;'}
+    Total Expenditure Rs:
+    %strong
+      = outflow
+      = link_to "Add Outflow", polymorphic_path([:new_finance_outflow]), :class => 'btn btn-info', :style => "float:right;"
+  %br
   = render :partial => 'outflow'

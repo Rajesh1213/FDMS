@@ -4,6 +4,8 @@ FinacialDataManagementSystem::Application.routes.draw do
   get "monthly_finances/download_track_record_pdf"
   get "personal_finance/index"
   get "personal_finance/balance_sheet"
+  get "personal_finance/income"
+  get "personal_finance/expenses"
   match "/download_pdf(.:format)" => "home#index_pdf", :method => :get, :as=>:index_pdf
 
   resources :di_transactions

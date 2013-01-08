@@ -1,0 +1,10 @@
+-outflow ||= (@finance_outlows.map(&:amount).inject{|sum,x| sum.to_i + x.to_i}).to_i
+= render :partial => 'personal_finance/shared/header',  :locals => {:title => "Expenses Details"}
+.div_inflow
+  .side_info
+    Total Income Rs:
+    %strong{ :style => 'color: brown;'}
+      = outflow
+      = link_to "Add Outflow", polymorphic_path([:new_finance_outflow]), :class => 'btn btn-info', :style => 'float:right;'
+  %br
+= render :partial => 'outflow'

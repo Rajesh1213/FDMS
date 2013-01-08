@@ -1,51 +1,41 @@
+%style
+  :plain
+    .btn-info {float:right}
+    .div_inflow {float:left; width:450px; margin:10px 0px 0px 10px;}
+    .outflow {float: right; width: 450px; margin: 10px 0px 0px 10px;}
+    .side_info {background-color: #efefef; padding: 15px; border: 1px solid #ccc;}
+    .total_income {text-align:center; margin:5px; border:1px solid #e5e5e5; padding: 15px; background-color: #efefef}
+
 -inflow ||= (@finance_inflows.map(&:amount).inject{|sum,x| sum.to_i + x.to_i}).to_i
 -outflow ||=  (@finance_outlows.map(&:amount).inject{|sum,x| sum.to_i + x.to_i}).to_i
 -total_income ||= inflow - outflow
+-month ||= Date.today().at_beginning_of_month().strftime("%B")
 
-%style
-  :plain
-    .div_inflow {float:left; width:450px; margin:10px 0px 0px 10px;}
-    .outflow {float: right; width: 450px; margin: 10px 0px 0px 10px;}
-    .total_income {text-align:center; margin:5px; border:1px solid #e5e5e5; padding: 15px; background-color: #efefef}
-    a { text-decoration : none;}
-
-#content-header
-  =image_tag 'home.png'
-  %h1 Welcome
-  %h3 Financial Data Management System Personal Module
-
-#inner-tab-menu
-  %ul
-    %li
-      =link_to " My Profile ", polymorphic_path([:customers, :my_profile])
-
-#page-yield
-  -if flash[:notice].present? 
-    %p.flash-msg
-      = flash[:notice]
-
+= render :partial => 'personal_finance/shared/header',  :locals => {:title => "Welcome"}
 .total_income
   %strong
-    = Date.today().at_beginning_of_month().strftime("%B")
-    Month's Total Income Balance (After Deducting all Expenditures of this month): Rs.
+    = month
+    Month's Total Income Balance : Rs
   %strong{ :style => 'color: brown;'}
     = total_income
-
+  %em
+    (After Deducting all Expenditures of this month)
 .main_balance
+
 .div_inflow
-  %div{:style => 'background-color: #efefef; padding: 15px; border: 1px solid #ccc;'}
+  .side_info
     Total Income Rs:
     %strong{ :style => 'color: brown;'}
       = inflow
-      = link_to "Add Inflow", polymorphic_path([:new_finance_inflow]), :class => 'btn btn-info', :style => "float:right;"
+      = link_to "Add Inflow", polymorphic_path([:new_finance_inflow]), :class => 'btn btn-info'
   %br
   = render :partial => 'inflow'
 
 .outflow
-  %div{:style => 'background-color: #efefef; padding: 15px; border: 1px solid #ccc;'}
+  .side_info
     Total Expenditure Rs:
     %strong{ :style => 'color: brown;'}
       = outflow
-      = link_to "Add Outflow", polymorphic_path([:new_finance_outflow]), :class => 'btn btn-info', :style => "float:right;"
+      = link_to "Add Outflow", polymorphic_path([:new_finance_outflow]), :class => 'btn btn-info'
   %br
   = render :partial => 'outflow'

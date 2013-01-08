@@ -8,4 +8,12 @@ class PersonalFinanceController < ApplicationController
    @finance_outlows = FinanceOutflow.all.reverse
   end
 
+  def income
+  	@finance_inflows = FinanceInflow.all.reverse
+  end
+
+  def expenses
+  	@finance_outlows = FinanceOutflow.all.reverse
+  end
+
 end

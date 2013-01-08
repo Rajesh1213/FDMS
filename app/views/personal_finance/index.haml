@@ -1,17 +1,4 @@
-#content-header
-	=image_tag 'home.png' 
-	%h1 Welcome 
-	%h3 Financial Data Management System
-
-#inner-tab-menu
-	%ul
-		%li
-			= link_to " My Profile ", polymorphic_path([:customers, :my_profile])
-
-#page-yield
-	-unless flash[:notice].nil? 
-		%p.flash-msg
-			= flash[:notice] 
+= render :partial => 'personal_finance/shared/header',  :locals => {:title => "Welcome"}
 .box
 	.link-box
 		.link-heading

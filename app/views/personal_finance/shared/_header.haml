@@ -1,0 +1,25 @@
+%style
+  :plain
+    em {font-size: 11px;}
+    a { text-decoration : none; }
+
+-header ||= 'title'
+
+#content-header
+  =image_tag 'home.png'
+  %h1=title 
+  %h3 Financial Data Management System Personal Module
+
+#inner-tab-menu
+  %ul
+    %li
+      =link_to " Balance Sheet ", polymorphic_path([:personal_finance, :balance_sheet])
+    %li
+      =link_to " Income ", polymorphic_path([:personal_finance, :income])
+    %li
+      =link_to " Expenses ", polymorphic_path([:personal_finance, :expenses])
+      
+#page-yield
+  -if flash[:notice].present? 
+    %p.flash-msg
+      = flash[:notice]

@@ -1,0 +1,10 @@
+-inflow ||= (@finance_inflows.map(&:amount).inject{|sum,x| sum.to_i + x.to_i}).to_i
+= render :partial => 'personal_finance/shared/header',  :locals => {:title => "Income Details"}
+.div_inflow
+  .side_info
+    Total Income Rs:
+    %strong{ :style => 'color: brown;'}
+      = inflow
+      = link_to "Add Inflow", polymorphic_path([:new_finance_inflow]), :class => 'btn btn-info', :style => "float:right;"
+  %br
+= render :partial => 'inflow'

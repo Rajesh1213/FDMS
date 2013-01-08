@@ -95,8 +95,8 @@
       <li>
         <%= link_to "Personal Finance", personal_finance_index_path %>
         <ul class="drop-down-menu">
-          <li><%= link_to 'Income', finance_inflows_path %></li>
-          <li><%= link_to 'Expenses', finance_outflows_path %></li>
+          <li><%= link_to 'Income', polymorphic_path([:personal_finance, :income]) %></li>
+          <li><%= link_to 'Expenses', polymorphic_path([:personal_finance, :expenses]) %></li>
           <li><%= link_to ' Transaction Balance sheet ', personal_finance_balance_sheet_path %></li>
         </ul>
       </li> 

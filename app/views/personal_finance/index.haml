@@ -2,12 +2,12 @@
 .box
 	.link-box
 		.link-heading
-			= link_to 'Income', polymorphic_path([:finance_inflows])
+			= link_to 'Income', polymorphic_path([:personal_finance, :income])
 		.link-descr Finance/Money In Flow
 
 	.link-box
 		.link-heading
-			= link_to 'Expenses', polymorphic_path([:finance_outflows])
+			= link_to 'Expenses', polymorphic_path([:personal_finance, :expenses])
 		.link-descr Finance/Money Out Flow
 
 	.link-box

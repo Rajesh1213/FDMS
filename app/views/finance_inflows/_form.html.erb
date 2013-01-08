@@ -1,6 +1,6 @@
 <%= form_for(@finance_inflow) do |f| %>
   <% if @finance_inflow.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="errorExplanation">
       <h2><%= pluralize(@finance_inflow.errors.count, "error") %> prohibited this finance_inflow from being saved:</h2>
 
       <ul>
@@ -23,6 +23,7 @@
     <%= f.label :income_type %>
     <%= f.text_field :income_type %>
   </div>
+  <br/>
   <div class="actions">
     <%= f.submit  :class=> "submit-button" %>
   </div>

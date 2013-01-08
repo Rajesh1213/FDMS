@@ -44,7 +44,7 @@ class FinanceOutflowsController < ApplicationController
 
     respond_to do |format|
       if @finance_outflow.save
-        format.html { redirect_to @finance_outflow, notice: 'Finance outflow was successfully created.' }
+        format.html { redirect_to polymorphic_path([:personal_finance, :expenses]), notice: 'Finance outflow was successfully created.' }
         format.json { render json: @finance_outflow, status: :created, location: @finance_outflow }
       else
         format.html { render action: "new" }

@@ -11,7 +11,7 @@
 -total_income ||= inflow - outflow
 -month ||= Date.today().at_beginning_of_month().strftime("%B")
 
-= render :partial => 'personal_finance/shared/header',  :locals => {:title => "Welcome"}
+= render :partial => 'personal_finance/shared/header',  :locals => {:title => "Balance Sheet"}
 .total_income
   %strong
     = month

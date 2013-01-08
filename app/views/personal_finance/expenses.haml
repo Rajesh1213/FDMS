@@ -5,6 +5,7 @@
     Total Income Rs:
     %strong{ :style => 'color: brown;'}
       = outflow
+      = link_to "Download PDF", polymorphic_path([:personal_finance, :income]), :class => 'btn btn-success', :style => "float:right; margin-left: 5px;"
       = link_to "Add Outflow", polymorphic_path([:new_finance_outflow]), :class => 'btn btn-info', :style => 'float:right;'
   %br
 = render :partial => 'outflow'

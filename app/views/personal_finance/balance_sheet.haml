@@ -27,7 +27,7 @@
 .total_income
   %strong
     = Date.today().at_beginning_of_month().strftime("%B")
-    Month's Total Income Balance (After Deducting all Expenditures): Rs.
+    Month's Total Income Balance (After Deducting all Expenditures of this month): Rs.
   %strong{ :style => 'color: brown;'}
     = total_income
 

@@ -1,0 +1,90 @@
+<div class="user_info" style="font-size: 14px; margin: 5px; border: 2px solid #ccc; background-color:#e5e5e5;">
+    <ul style="list-style:none;" class ="user_info_ul" >
+      <li><strong>Tenant Name : </strong> <span style="color: brown"><%= @rent.tenant_name %> </span></li> 
+      <li><strong>Address: </strong> <%=@rent.permanent_address %> </li>
+      <li><strong>Mobile: </strong> <%=@rent.mobile%> </li>
+      <li><strong>Rented Property: </strong> <%=@rent.add_property.house_number%> </li>
+      <li><strong>Area: </strong> <%=@rent.add_property.area%> </li>
+      <li><strong>Street Address: </strong> <%=@rent.add_property.street_address%> </li>
+    </ul>
+    <ul style="list-style:none;" class ="rt_user_info_ul" >
+      <li><strong>Contract Signed Date : </strong> <%= @rent.signed_contract_date.strftime("%d-%m-%Y") %> </li> 
+      <li><strong>Contract Reneval Date: </strong> <%=@rent.reneval_contract_date.strftime("%d-%m-%Y") %> </li>
+      <li><strong>Advance Taken: </strong> Rs. <%=@rent.advance_taken%> </li>
+    </ul>
+    <div class="clearfix"> </div>
+  </div>
+
+<div style="margin: 5px; border-bottom: 1px solid #ccc;"> <strong> --> Rental Full Track Record: </strong> </div>
+ <table class ="table table-bordered">
+
+  <tr>
+    
+    <th>S.No</th>
+    <th>Rent Amount</th>
+    <th>Due Date</th>
+    <th>Paid Date</th>
+    <th>Month</th>
+    <th>Next Due Date</th>
+    <th>Paid Amount</th>
+    <th>Bal Amount</th>
+    <th>Collected By</th>
+    <th> </th>
+  </tr>
+
+<%i = 0 %>
+
+<% unknown = "Unknown" %>
+<% @rent_details.each do |rent| %>
+  <tr>
+    <% unless rent.bal_amount == "0" %> <td style ="background-color: orange; "> <% else %> <td style="background-color:green; color: #fff;"> <% end %>
+     <strong> <%= i = i.next %> </strong> </td>
+    <td>Rs. <%= rent.rent_amount %></td>
+    <td><%= rent.due_date.strftime("%d-%m-%Y")%></td>
+    <td><%= rent.paid_date.strftime("%d-%m-%Y") unless rent.paid_date.nil?  %></td>
+    <td><%= rent.due_date.strftime("%B") %></td>
+    <td><%= rent.next_due_date.strftime("%d-%m-%Y") %></td>
+    <td><%= rent.paid_amount %></td>
+    <td>Rs. <%= rent.bal_amount %></td>
+    <% unless rent.collected_by.nil? or rent.collected_by.blank? %>
+      <td><%= rent.collected_by %></td>
+    <% else %>
+      <td>-</td>
+    <% end %>
+    <td>
+    <% unless rent.bal_amount == "0" %>
+      <%= link_to_remote "Make Payment",:url => { :action => "make_payment", :id => rent.id }, :method => "get" %>
+    <% else %>
+      -
+    <% end %>
+    </td>
+  </tr>
+  <% if i == 12 %>
+    <% i = 0 %>
+  <% end %>
+<% end %>
+<tr style = "background-color: #ccc;" >
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td><strong> Total Rent:  </strong> </td>
+<td><strong> Rs. <%= @rent_details.map(&:rent_amount).inject{|sum,x| sum.to_i + x.to_i} %> </strong> </td>   
+<td> </td> 
+</tr>
+<tr style = "background-color: #ccc;" >
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td><strong> Total paid:  </strong> </td>
+<td><strong> Rs. <%= @rent_details.map(&:paid_amount).inject{|sum,x| sum.to_i + x.to_i} %> </strong> </td>
+<td> </td> 
+</tr>
+</table>

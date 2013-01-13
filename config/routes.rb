@@ -1,6 +1,7 @@
 FinacialDataManagementSystem::Application.routes.draw do
 
-  get "transactions/donwload_transaction_pdf"
+  get "rents/download_rent_full_details_pdf"
+  get "transactions/download_transaction_pdf"
   get "monthly_finances/download_track_record_pdf"
   get "personal_finance/index"
   get "personal_finance/balance_sheet"

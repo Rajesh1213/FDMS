@@ -21,6 +21,19 @@ class RentsController < ApplicationController
   def view_rents
   end
 
+  #generates a pdf format for rent full details. refer method full_details()
+  def download_rent_full_details_pdf
+    @rent = Rent.find(params[:id])
+    @rent_details = @rent.rents_transactions
+
+    respond_to do |format|
+        format.html
+        format.pdf do
+          render :pdf => "Rent Full Details-#{Time.now}"
+        end
+      end
+  end
+
   def full_details
     @rent = Rent.find(params[:id])
     @rent_details = @rent.rents_transactions

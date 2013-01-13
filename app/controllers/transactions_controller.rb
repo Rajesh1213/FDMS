@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
 
-  def donwload_transaction_pdf
+  def download_transaction_pdf
     if params.include? "start_date" and params.include? "end_date" and !params["start_date"].blank? and !params["end_date"].blank? 
       start_date = Time.parse(params[:start_date]).strftime('%y-%m-%d 00:00:00')
       end_date = Time.parse(params[:end_date]).strftime('%y-%m-%d 23:59:00')
@@ -17,7 +17,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render :pdf => "Monthly Finance Transactions"
+        render :pdf => "Monthly Finance Transactions-#{Time.now}"
       end
     end
   end

@@ -9,5 +9,4 @@
       = render :partial => 'li', :locals => {:name => 'Pincode :', :c_edit => @add_property.pincode, :class_name => "listodd"}
       = render :partial => 'li', :locals => {:name => 'State :', :c_edit => @add_property.state, :class_name => "listeven"}
       = render :partial => 'li', :locals => {:name => 'Country :', :c_edit => @add_property.country, :class_name => "listodd"}
-
     =link_to 'Edit', edit_add_property_path(@add_property), :class => "submit-button"

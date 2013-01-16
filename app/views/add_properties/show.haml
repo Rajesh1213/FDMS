@@ -1,43 +1,13 @@
 = render :partial => 'shared_partials/header',  :locals => {:title => "Show Properties"}
+#page-yield
+  .box
+    %ul{:id => "category-list"}
+      = render :partial => 'li', :locals => {:name => 'Area :', :c_edit => @add_property.area, :class_name => "listodd"}
+      = render :partial => 'li', :locals => {:name => 'Property Type :', :c_edit => @add_property.property_type, :class_name => "listodd"}
+      = render :partial => 'li', :locals => {:name => 'Street Address :', :c_edit => @add_property.street_address, :class_name => "listodd"}
+      = render :partial => 'li', :locals => {:name => 'City :', :c_edit => @add_property.city, :class_name => "listodd"}
+      = render :partial => 'li', :locals => {:name => 'Pincode :', :c_edit => @add_property.pincode, :class_name => "listodd"}
+      = render :partial => 'li', :locals => {:name => 'State :', :c_edit => @add_property.state, :class_name => "listodd"}
+      = render :partial => 'li', :locals => {:name => 'Country :', :c_edit => @add_property.country, :class_name => "listodd"}
 
-
-/ <p id="notice"><%= notice %></p>
-
-/ <p>
-/   <b>Area:</b>
-/   <%= @add_property.area %>
-/ </p>
-
-/ <p>
-/   <b>Property type:</b>
-/   <%= @add_property.property_type %>
-/ </p>
-
-/ <p>
-/   <b>Street address:</b>
-/   <%= @add_property.street_address %>
-/ </p>
-
-/ <p>
-/   <b>City:</b>
-/   <%= @add_property.city %>
-/ </p>
-
-/ <p>
-/   <b>Pincode:</b>
-/   <%= @add_property.pincode %>
-/ </p>
-
-/ <p>
-/   <b>State:</b>
-/   <%= @add_property.state %>
-/ </p>
-
-/ <p>
-/   <b>Country:</b>
-/   <%= @add_property.country %>
-/ </p>
-
-
-/ <%= link_to 'Edit', edit_add_property_path(@add_property) %> |
-/ <%= link_to 'Back', add_properties_path %>
+    =link_to 'Edit', edit_add_property_path(@add_property), :class => "submit-button"

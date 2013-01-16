@@ -9,7 +9,6 @@
 /Gemfile.lock
 /public
 /public/assets/
-
 # Ignore the default SQLite database.
 /db/*.sqlite3
 

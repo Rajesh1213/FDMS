@@ -5,12 +5,12 @@ gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
- gem 'mysql'
+ gem 'mysql', '2.8.1'
  gem 'devise'
  gem 'cancan'
  gem 'carrierwave'
  gem 'prototype-rails'
- gem 'calendar_date_select', :git => 'git://github.com/paneq/calendar_date_select.git'
+ gem 'calendar_date_select', :git => 'http://github.com/paneq/calendar_date_select.git', :branch => 'rails3test'
  gem 'carrierwave'
  gem 'whenever', :require => false
  gem 'will_paginate', '~> 3.0'

@@ -1,11 +1,11 @@
 class DailyFinance < ActiveRecord::Base
-  attr_accessible :agreement_date, :amount_recieved, :cleared_balance, 
+  attr_accessible :amount_recieved, :cleared_balance, 
                   :customer_id, :date_of_issue, :due_date, :interest_percent,
                   :loan_amount, :loan_name, :loan_status, :main_balance, :payment_days
 
- validates_presence_of :agreement_date,:customer_id,
-                       :date_of_issue, :due_date 
-
+ validates_presence_of :customer_id,
+                       :date_of_issue, :due_date
+ 
  validates :amount_recieved, :cleared_balance, :loan_amount,
            :main_balance, :payment_days, :interest_percent,
            :numericality => { :only_integer => true }                    

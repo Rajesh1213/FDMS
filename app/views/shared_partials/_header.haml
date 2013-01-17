@@ -15,8 +15,10 @@
 #inner-tab-menu
   %ul
     %li
+      = link_to " My Profile ", :controller => "customers", :action => "my_profile"
       
 #page-yield
   -if flash[:notice].present? 
     %p.flash-msg
       = flash[:notice]
+  .box

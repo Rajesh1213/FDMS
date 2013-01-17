@@ -14,7 +14,7 @@ class MonthlyFinance < ActiveRecord::Base
                         :date_of_issue, :due_date,
                         :interest_percent,:loan_name, 
                         :loan_status, :main_balance, 
-                        :payment_months, :loan_amount
+                        :payment_months, :loan_amount, :partner_id
   
   #Fields Which Should be Numerical are validated here.
   validates :main_balance, :amount_recieved, 

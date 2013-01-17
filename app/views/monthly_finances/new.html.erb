@@ -31,9 +31,6 @@
 
 <div id="page-yield">
   <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
-    <div class="transations_info">
-    <span>Total Balance: <strong> Rs.<%= @transaction  %> /- </strong> </span>
-  </div>
   <div class="box">
 <%= render 'form' %>
 

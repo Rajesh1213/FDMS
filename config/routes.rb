@@ -3,6 +3,8 @@ FinacialDataManagementSystem::Application.routes.draw do
   get "rents/download_rent_full_details_pdf"
   get "transactions/download_transaction_pdf"
   get "monthly_finances/download_track_record_pdf"
+  get "monthly_finances/list"
+  get "daily_finances/list"
   get "personal_finance/index"
   get "personal_finance/balance_sheet"
   get "personal_finance/income"
@@ -13,7 +15,7 @@ FinacialDataManagementSystem::Application.routes.draw do
 
   resources :df_transactions
 
-  resources :mi_transactions
+  resources :mi_utransactions
 
   resources :transactions
 

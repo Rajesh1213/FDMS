@@ -1,0 +1,43 @@
+= render :partial => 'shared_partials/header',  :locals => {:title => "Monthly Finance List"}
+%table{ :class => 'table table-striped table-condensed table-bordered' }
+	%thead
+		%tr
+			%th{ :class => "colPosition"} S.no
+			%th{ :class => "colPosition"} Account Number
+			%th{ :class => "colPosition"} Partner ID
+			%th{ :class => "colPosition"} Loan Name
+			%th{ :class => "colPosition"} Payment Months
+			%th{ :class => "colPosition"} Amount Issued
+			%th{ :class => "colPosition"} Total Amount Paid
+			%th{ :class => "colPosition"} Date of Issue
+			%th{ :class => "colPosition"} Full Details
+	- i = 0
+	-for l in @content_list.reverse
+		-balance =  l.main_balance.to_i - l.cleared_balance.to_i
+		%tr
+			%td
+				=i = i.next
+			%td
+				=l.customer.account_number
+			%td
+				=link_to l.try(:partner).try(:unique_id), l.partner.unique_id? ? polymorphic_path([:partner], :id => l.partner.id) : '-'
+			%td
+				=l.loan_name
+			%td
+				=l.payment_months
+			%td{ :style => "background-color: #dff0d8;"}
+				="Rs. #{l.main_balance}"
+			-if l.cleared_balance.nil? or l.cleared_balance.blank?
+				%td{ :style => "background-color: #f2dede;"}
+					Rs. 0
+			-else
+				-if balance == 0
+					%td{ :style => "background-color: #dff0d8;"}
+						= "Rs. #{l.cleared_balance}"
+				-else
+					%td{ :style => "background-color: #f2dede;"}
+						= "Rs. #{l.cleared_balance}"
+			%td
+				=l.date_of_issue.strftime("%d-%m-%Y")
+			%td
+				= link_to 'Full Details', :controller => "monthly_finances", :action => "track_record", :id => l.id

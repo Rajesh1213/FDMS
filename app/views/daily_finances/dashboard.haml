@@ -1,0 +1,11 @@
+= render :partial => 'shared_partials/header',  :locals => {:title => "Daily Finance"}
+
+.link-box
+	.link-heading
+		= link_to 'New Finance', new_daily_finance_path
+	.link-descr Issue New Daily Finance
+
+.link-box
+	.link-heading
+		= link_to 'List Daily Finances', polymorphic_path([:daily_finances, :list])
+	.list-descr Issue New Daily Finance

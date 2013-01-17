@@ -15,6 +15,11 @@ class DailyFinancesController < ApplicationController
   def dashboard
   end
 
+  def list
+    @content_list = DailyFinance.find(:all, :conditions => "loan_status = 'active' ")
+    # render :text => @content_list;return
+  end
+
   # GET /daily_finances/1
   # GET /daily_finances/1.json
   def show

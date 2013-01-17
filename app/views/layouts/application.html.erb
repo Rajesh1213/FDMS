@@ -39,7 +39,9 @@
           </a> 
         </div>
         <div id="outer-main-menu" style="margin-top: 18px;">
-       <% if user_signed_in? %>
+
+<!-- Start move this shit into a partial and convert it into haml -->
+  <% if user_signed_in? %>
            <ul class="sf-menu">
             <li>
         <%= link_to "Customers", customers_path %>
@@ -102,7 +104,10 @@
       </li> 
       </li> 
     </ul>
-    <% end %>
+<% end %>
+<!-- End of the menu move this shit into a partial and convert to haml  -->
+
+
         </div>
         <div id="outer-autosuggest-menu">
           <ul id="main-menu">

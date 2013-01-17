@@ -5,6 +5,8 @@ class Partner < ActiveRecord::Base
 
   belongs_to :m_director
   has_many :partners
+  has_many :daily_finances
+  has_many :monthly_finances
   has_many :monthly_f_investments
   
   validates_presence_of :address, :email, :first_name,

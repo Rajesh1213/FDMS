@@ -15,7 +15,7 @@ FinacialDataManagementSystem::Application.routes.draw do
 
   resources :df_transactions
 
-  resources :mi_utransactions
+  resources :mi_transactions
 
   resources :transactions
 

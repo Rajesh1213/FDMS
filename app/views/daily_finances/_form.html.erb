@@ -20,7 +20,7 @@ $jq = jQuery.noConflict();
 
 <%= form_for(@daily_finance) do |f| %>
   <% if @daily_finance.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="errorExplanation">
       <h2><%= pluralize(@daily_finance.errors.count, "error") %> prohibited this daily_finance from being saved:</h2>
 
       <ul>
@@ -41,6 +41,11 @@ $jq = jQuery.noConflict();
   </div>
    </div>
    <% end %>
+
+   <div class="label-field-pair">
+    <label> Select Partner <span class="necessary-field">*</span> </label>
+    <div class="text-input-bg"> <%= f.select 'partner_id', options_for_select(@partners.collect{ |u| [u.first_name + ' ' + u.last_name + '- ('+ u.unique_id + ')', u.id] }), :prompt => "Select a Partner" %> </div>
+  </div>
 
 
   <div class="label-field-pair">

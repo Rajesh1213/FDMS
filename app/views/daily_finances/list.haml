@@ -20,7 +20,10 @@
 			%td
 				=l.customer.account_number
 			%td
-				=link_to 'Partner'
+				-if l.partner.present?
+					=link_to l.try(:partner).try(:unique_id), polymorphic_path([:partner], :id => l.partner.id)
+				-else
+					="-"
 			%td
 				=l.loan_name
 			%td

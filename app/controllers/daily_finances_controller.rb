@@ -44,6 +44,7 @@ class DailyFinancesController < ApplicationController
   def new
     @daily_finance = DailyFinance.new
     @customer = Customer.find(params[:id]) if params[:id]
+    @partners = Partner.all
 
     @dfinance_name = DailyFinance.last
     if @dfinance_name.nil?
@@ -70,6 +71,7 @@ class DailyFinancesController < ApplicationController
     @customer_id = params[:daily_finance][:customer_id]
     @customer = Customer.find_by_account_number(@customer_id)
     @daily_finance.customer_id = @customer.id
+    @partners = Partner.all
 
     respond_to do |format|
       if @daily_finance.save

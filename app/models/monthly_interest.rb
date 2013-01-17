@@ -1,11 +1,11 @@
 class MonthlyInterest < ActiveRecord::Base
   attr_accessible :customer_id, :date_of_issue, :due_closing_date, 
                   :interest_per_day, :loan_amount, :loan_name, :payment_days, 
-                  :total_interest, :total_paid, :user_id
+                  :total_interest, :total_paid
 
   #Fields Which are Required are validated here.
   validates_presence_of :customer_id, :date_of_issue, :due_closing_date,
-                        :payment_days, :user_id
+                        :payment_days
 
   #Fields Which Should be Numerical are validated here. 
   validates :interest_per_day, :loan_amount,:total_interest, :total_paid,

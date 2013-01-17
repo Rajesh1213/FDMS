@@ -8,20 +8,17 @@
 #content-header
   =image_tag 'home.png'
   %h1=title 
-  %h3 Financial Data Management System Personal Module
+  %h3 Financial Data Management System
   #app-back-button
     =link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" 
 
 #inner-tab-menu
   %ul
     %li
-      =link_to " Balance Sheet ", polymorphic_path([:personal_finance, :balance_sheet])
-    %li
-      =link_to " Income ", polymorphic_path([:personal_finance, :income])
-    %li
-      =link_to " Expenses ", polymorphic_path([:personal_finance, :expenses])
+      = link_to " My Profile ", :controller => "customers", :action => "my_profile"
       
 #page-yield
   -if flash[:notice].present? 
     %p.flash-msg
       = flash[:notice]
+  .box

@@ -1,0 +1,12 @@
+= render :partial => 'shared_partials/header',  :locals => {:title => "Show Properties"}
+#page-yield
+  .box
+    %ul{:id => "category-list"}
+      = render :partial => 'li', :locals => {:name => 'Area :', :c_edit => @add_property.area, :class_name => "listodd"}
+      = render :partial => 'li', :locals => {:name => 'Property Type :', :c_edit => @add_property.property_type, :class_name => "listeven"}
+      = render :partial => 'li', :locals => {:name => 'Street Address :', :c_edit => @add_property.street_address, :class_name => "listodd"}
+      = render :partial => 'li', :locals => {:name => 'City :', :c_edit => @add_property.city, :class_name => "listeven"}
+      = render :partial => 'li', :locals => {:name => 'Pincode :', :c_edit => @add_property.pincode, :class_name => "listodd"}
+      = render :partial => 'li', :locals => {:name => 'State :', :c_edit => @add_property.state, :class_name => "listeven"}
+      = render :partial => 'li', :locals => {:name => 'Country :', :c_edit => @add_property.country, :class_name => "listodd"}
+    =link_to 'Edit', edit_add_property_path(@add_property), :class => "submit-button"

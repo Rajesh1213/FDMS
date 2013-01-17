@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126203000) do
+ActiveRecord::Schema.define(:version => 20130117090102) do
 
   create_table "add_properties", :force => true do |t|
     t.string   "area"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20121126203000) do
     t.string   "security_doc_2"
     t.string   "security_doc_3"
     t.string   "security_doc_4"
+    t.integer  "partner_id"
   end
 
   create_table "daily_interest_loan_records", :force => true do |t|
@@ -113,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20121126203000) do
     t.datetime "updated_at",       :null => false
     t.string   "loan_name"
     t.integer  "payment_days"
+    t.integer  "partner_id"
   end
 
   create_table "df_transactions", :force => true do |t|
@@ -266,6 +268,7 @@ ActiveRecord::Schema.define(:version => 20121126203000) do
     t.integer  "payment_days"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.integer  "partner_id"
   end
 
   create_table "partners", :force => true do |t|

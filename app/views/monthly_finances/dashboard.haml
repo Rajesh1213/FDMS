@@ -1,0 +1,11 @@
+= render :partial => 'shared_partials/header',  :locals => {:title => "Monthly Finance"}
+
+.link-box
+  .link-heading
+    = link_to 'New Finance', new_monthly_finance_path
+  .link-descr Issue New Monthly Finance
+
+.link-box
+  .link-heading
+    = link_to 'List Monthly Finances', polymorphic_path([:monthly_finances, :list])
+  .link-descr List/Search all Monthly Finances

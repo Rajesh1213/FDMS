@@ -10,7 +10,12 @@ class MonthlyFinancesController < ApplicationController
     #   format.json { render json: @monthly_finances }
     # end
   end
+
   def dashboard
+  end
+
+  def list
+    @content_list = MonthlyFinance.find(:all, :conditions => "loan_status = 'active' ")
   end
 
   # GET /monthly_finances/1

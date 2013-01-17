@@ -44,7 +44,7 @@ class AddPropertiesController < ApplicationController
 
     respond_to do |format|
       if @add_property.save
-        format.html { redirect_to @add_property, notice: 'Add property was successfully created.' }
+        format.html { redirect_to action: 'index', notice: 'Add property was successfully created.' }
         format.json { render json: @add_property, status: :created, location: @add_property }
       else
         format.html { render action: "new" }

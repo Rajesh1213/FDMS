@@ -5,10 +5,10 @@
 #   gem 'sqlite3'
 development:
   adapter: mysql
-  database: fdms_management
+  database: fdms_management_1
   username: root
-  # password: <%= ENV['MYSQL_PASSWORD'] %>
-  password: password
+  password: <%= ENV['MYSQL_PASSWORD'] %>
+  # password: rathod
   timeout: 5000
 
 # Warning: The database defined as "test" will be erased and

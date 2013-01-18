@@ -42,10 +42,10 @@
         </div>
         <div id="outer-main-menu" style="margin-top: 18px;">
 
-        <!-- Rendering Menu Partial here -->
-        <% if user_signed_in? %>
-        <%= render :partial => 'layouts/menu' %>
-        <% end %>
+<!-- get the menu bar from partial if user is signed in-->
+    <% if user_signed_in? %>
+      <%= render :partial => "/layouts/menu_bar"%>
+    <% end %>
 
         </div>
         <div id="outer-autosuggest-menu">

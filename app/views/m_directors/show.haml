@@ -1,0 +1,53 @@
+-full_name = @m_director.first_name+' '+@m_director.last_name+' ('+@m_director.unique_id+')'
+= render :partial => '/m_directors/md_header', :locals => {:title => "Managing Director : #{full_name}"}
+.box{:style => 'margin: 0px auto; width: 600px;'}
+
+  %ul{:id => "category-list"}
+
+    %li{:class => "list#{cycle('odd','even')}"}
+      .category-name Name :
+      .category-edit
+        %strong= full_name
+
+    %li{:class => "list#{cycle('odd','even')}"}
+      .category-name Unique ID:
+      .category-edit
+        %strong= @m_director.unique_id
+
+    %li{:class => "list#{cycle('odd','even')}"}
+      .category-name Number of partners:
+      .category-edit
+        %strong= link_to @m_director.partners.count, :controller => 'm_directors', :action => 'partners_list', :id => @m_director.id
+
+    %li{:class => "list#{cycle('odd','even')}"}
+      .category-name First Name:
+      .category-edit
+        %strong= @m_director.first_name
+
+    %li{:class => "list#{cycle('odd','even')}"}
+      .category-name Last Name:
+      .category-edit
+        %strong= @m_director.last_name
+
+    %li{:class => "list#{cycle('odd','even')}"}
+      .category-name Phone1:
+      .category-edit
+        %strong= @m_director.phone1
+
+    %li{:class => "list#{cycle('odd','even')}"}
+      .category-name Phone2:
+      .category-edit
+        %strong= @m_director.phone2
+
+    %li{:class => "list#{cycle('odd','even')}"}
+      .category-name Email:
+      .category-edit
+        %strong= @m_director.email
+
+  %div{:id => "category-list"}
+    .category-name
+      %strong Address:
+    .category-edit{:style => 'width: 500px;'}
+      = @m_director.address
+  %br
+  = link_to 'Edit', edit_m_director_path(@m_director),:class => "submit-button"

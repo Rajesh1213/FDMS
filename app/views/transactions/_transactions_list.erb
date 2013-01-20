@@ -1,4 +1,9 @@
-<table class="table table-bordered table-hover">
+<% if params[:action] == 'download_transaction_pdf' %>
+  <table class="table table-bordered table-hover" border="1" cellspacing="0">
+<% else %>
+  <table class="table table-bordered table-hover">
+<% end %>
+
 
   <!-- -------------- -->
 

@@ -1,3 +1,4 @@
+<% logger.info"params.... #{params.inspect}"%>
 <div class="user_info" style="font-size: 14px; margin: 5px; border: 2px solid #ccc; background-color:#e5e5e5;">
     <ul style="list-style:none;" class ="user_info_ul" >
       <li><strong>Tenant Name : </strong> <span style="color: brown"><%= @rent.tenant_name %> </span></li> 
@@ -16,8 +17,11 @@
   </div>
 
 <div style="margin: 5px; border-bottom: 1px solid #ccc;"> <strong> --> Rental Full Track Record: </strong> </div>
- <table class ="table table-bordered">
-
+ <% if params[:action] == "full_details" %>
+    <table class ="table table-bordered">
+ <% else %>
+    <table class ="table table-bordered" border="1" cellspacing="0">
+ <% end %>
   <tr>
     
     <th>S.No</th>

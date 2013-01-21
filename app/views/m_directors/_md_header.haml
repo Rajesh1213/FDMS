@@ -10,10 +10,10 @@
     =image_tag @m_director.photo_url, :size => '70x70', :class => 'thumbnail'
   -else
     =image_tag 'customer.jpeg'
-  %h1=title 
+  %h1=title
   %h3 Financial Data Management System
   #app-back-button
-    =link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" 
+    =link_to_function image_tag("buttons/back.png",:border => 0), "history.back()"
 
 #inner-tab-menu
   %ul
@@ -22,6 +22,6 @@
     %li=link_to 'All Directors', m_directors_path
 
 #page-yield
-  -if flash[:notice].present? 
+  -if flash[:notice].present?
     %p.flash-msg
       = flash[:notice]

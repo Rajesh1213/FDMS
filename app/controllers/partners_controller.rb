@@ -15,8 +15,14 @@ class PartnersController < ApplicationController
   # GET /partners/1
   # GET /partners/1.json
   def show
-    @partner = Partner.find(params[:id])
+    pid = params[:id]
+    @partner = Partner.find(pid)
 
+    @mf_loans = MonthlyFinance.find_all_by_partner_id(pid).count
+    @df_loans = DailyFinance.find_all_by_partner_id(pid).count
+
+    @loans_issued = @mf_loans + @df_loans
+    # render :text => @loans_issued.inspect;return
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @partner }

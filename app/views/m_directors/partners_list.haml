@@ -1,0 +1,31 @@
+%style
+  :plain
+    .heading {text-align:center; margin:5px; border:1px solid #e5e5e5; padding: 15px; background-color: #efefef}
+    
+-full_name = @m_director.first_name+' '+@m_director.last_name+' ('+@m_director.unique_id+')'
+= render :partial => '/m_directors/md_header', :locals => {:title => "Managing Director : #{full_name}", :partner => "false" }
+
+.box
+  .heading
+    %strong Partners List of :  #{full_name}
+
+  - i ||= 0
+  %table{ :class => 'table  table-striped' }
+    %tr{ :class=> "tr-head"}
+      %th S.no
+      %th Unique ID
+      %th Name
+      %th Joining Date
+      %th Total Loans Issued
+      %th Full Details
+
+    - i = 0
+    -for p in @partners
+      %tr
+        %td= i = i.next
+        %td
+          %strong= p.unique_id
+        %td= p.first_name+' '+p.last_name
+        %td= p.created_at.strftime("%d-%m-%Y")
+        %td= render :partial => 'm_directors/loans_issued', :locals => { :pid => p.id } 
+        %td= link_to 'Full Details', partner_path(p.id)

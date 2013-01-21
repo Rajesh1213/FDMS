@@ -15,5 +15,15 @@ class MDirector < ActiveRecord::Base
   mount_uploader :photo, ImageUploader
 
   validates :unique_id, :uniqueness => true
+
+  def total_loans(pid)
+    Rails.logger.info"=---------------------------inside total_loans helper"
+    id = pid
+    mf_loans = MonthlyFinance.find_all_by_partner_id(id).count
+    df_loans = DailyFinance.find_all_by_partner_id(id).count
+
+    loans_issued = mf_loans + df_loans
+    return loans_issued
+  end
    
 end

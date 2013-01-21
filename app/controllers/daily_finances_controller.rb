@@ -68,6 +68,8 @@ class DailyFinancesController < ApplicationController
   def create
     #render :text => params.inspect;return
     @daily_finance = DailyFinance.new(params[:daily_finance])
+    @daily_finance.cleared_balance = 0
+    @daily_finance.loan_status ="active"
     @customer_id = params[:daily_finance][:customer_id]
     @customer = Customer.find_by_account_number(@customer_id)
     @daily_finance.customer_id = @customer.id

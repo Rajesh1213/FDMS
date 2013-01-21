@@ -1,5 +1,5 @@
 -full_name = @m_director.first_name+' '+@m_director.last_name+' ('+@m_director.unique_id+')'
-= render :partial => '/m_directors/md_header', :locals => {:title => "Managing Director : #{full_name}"}
+= render :partial => '/m_directors/md_header', :locals => {:title => "Managing Director : #{full_name}", :partner => "true"}
 .box{:style => 'margin: 0px auto; width: 600px;'}
 
   %ul{:id => "category-list"}

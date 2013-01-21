@@ -1,30 +1,14 @@
+<%full_name = @partner.first_name+' '+@partner.last_name+' ('+@partner.unique_id+')'%>
+<%= render :partial => '/partners/partners_head' , :locals => {:title => "Partner: #{full_name}" }%>
 
-<style>.box{width: 500px;margin: 0px auto;} #extender{ height: 100px;}</style>
-<div id="content-header">
-  <%= image_tag('users-icon.jpeg') %>
-  <h1> Managing Directors </h1>
-  <h3> Show Details  </h3>
-  <div id="app-back-button">
-    <%= link_to_function image_tag("buttons/back.png",:border => 0), "history.back()" %>
-  </div>
-</div>
+<div class="box" style='margin: 0px auto; width: 600px;'>
+ <ul id="category-list"> 
 
-<div id="inner-tab-menu">
-  <ul>
-    <li><%= link_to 'All Partners', partners_path %></li>
-  </ul>
-</div>
+      <li class="list<%=cycle('odd','even') %>">
+        <div class="category-name"> Full Name: </div>
+        <div class="category-edit"><strong>  <%= full_name %> </strong> </div>
+      </li>
 
-<div id="page-yield">
-  <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
-  <div class="box">
- 
- <% unless  @partner.photo.blank? or  @partner.photo.nil? %>
-   <div style="text-align:center; "> <%= image_tag( @partner.photo_url, :size => '125x125', :class => "thumbnail") %> </div>
- <% end %>
- 
- <ul id="category-list">
-      
       <li class="list<%=cycle('odd','even') %>">
         <div class="category-name">  Unique ID: </div>
         <div class="category-edit"><strong>  <%= @partner.unique_id %> </strong> </div>
@@ -32,7 +16,7 @@
 
       <li class="list<%=cycle('odd','even') %>">
         <div class="category-name">  Loans Issued: </div>
-        <div class="category-edit"><strong>  <%= MonthlyFinance.find_all_by_partner_id(@partner.id).count %> </strong> </div>
+        <div class="category-edit"><strong>  <%= @loans_issued %> </strong> </div>
       </li>
 
       <li class="list<%=cycle('odd','even') %>">
@@ -64,19 +48,13 @@
         <div class="category-name">  Email: </div>
         <div class="category-edit"> <%= @partner.email %> </div>
       </li>
-
  </ul>
-  
   <div>
-
         <div class="category-name"><strong>Address:</strong></div>
         <div class="category-edit" > <%= @partner.address %> </div>
-
   </div>
-
 <br/>
 <%= link_to 'Edit', edit_partner_path(@partner),:class => "submit-button"%> 
-
 </div>
 </div>
 

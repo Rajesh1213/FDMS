@@ -1,6 +1,7 @@
 <%full_name = @partner.first_name+' '+@partner.last_name+' ('+@partner.unique_id+')'%>
+<% md_name = @partner.m_director.first_name+' '+@partner.m_director.last_name+' ('+ @partner.m_director.unique_id+')'%>
 <%= render :partial => '/partners/partners_head' , :locals => {:title => "Partner: #{full_name}" }%>
-
+<%= render :partial => '/partners/loan_details' %>
 <div class="box" style='margin: 0px auto; width: 600px;'>
  <ul id="category-list"> 
 
@@ -21,7 +22,7 @@
 
       <li class="list<%=cycle('odd','even') %>">
         <div class="category-name"> Managing Director : </div>
-        <div class="category-edit"><strong>  <%= @partner.m_director.first_name %> <%= @partner.m_director.last_name %> - ( <%= @partner.m_director.unique_id %> ) </strong> </div>
+        <div class="category-edit"><strong> <%= link_to md_name, m_director_path(@partner.m_director.id) %> </strong> </div>
       </li>
 
       <li class="list<%=cycle('odd','even') %>">

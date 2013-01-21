@@ -7,7 +7,7 @@
 
 .box
   .heading
-    %strong Partners List of :  #{full_name}
+    %strong Partners List of MD:  #{full_name}
 
   - i ||= 0
   %table{ :class => 'table  table-striped' }
@@ -21,11 +21,12 @@
 
     - i = 0
     -for p in @partners
+      -name = p.first_name+' '+p.last_name
       %tr
         %td= i = i.next
         %td
           %strong= p.unique_id
-        %td= p.first_name+' '+p.last_name
+        %td= link_to name, partner_path(p)
         %td= p.created_at.strftime("%d-%m-%Y")
         %td= render :partial => 'm_directors/loans_issued', :locals => { :pid => p }
-        %td= link_to 'Full Details', partner_path(p.id)
+        %td= link_to 'Full Details', partner_path(p)

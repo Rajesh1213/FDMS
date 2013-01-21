@@ -18,7 +18,7 @@
 #inner-tab-menu
   %ul
     -if partner_link == "true"
-      %li= link_to "#{@m_director.partners.count} Partners ", polymorphic_path([:m_directors, :partners_list], :id => @m_director.id)
+      %li= link_to "#{pluralize(@m_director.partners.count, 'Partner')}", polymorphic_path([:m_directors, :partners_list], :id => @m_director.id)
     %li=link_to 'All Directors', m_directors_path
 
 #page-yield

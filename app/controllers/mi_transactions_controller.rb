@@ -1,8 +1,34 @@
 class MiTransactionsController < ApplicationController
+    
+  def download_transaction_pdf
+    if params.include? "start_date" and params.include? "end_date" and !params["start_date"][0].blank? and !params["end_date"][0].blank? 
+      start_date = Time.parse(params[:start_date]).strftime('%y-%m-%d 00:00:00')
+      end_date = Time.parse(params[:end_date]).strftime('%y-%m-%d 23:59:00')
+
+      @mi_transactions = MiTransaction.where(:tran_date => start_date..end_date).paginate(:page => params[:page], :per_page => 15)
+    else
+      @mi_transactions = MiTransaction.paginate(:page => params[:page], :per_page => 15)
+    end
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => "Monthly Interest Transactions-#{Time.now}"
+      end
+    end
+  end
+
   # GET /mi_transactions
   # GET /mi_transactions.json
   def index
-    @mi_transactions = MiTransaction.all
+    if params.include? "start_date" and params.include? "end_date" and !params["start_date"][0].blank? and !params["end_date"][0].blank? 
+      start_date = Time.parse(params[:start_date][0]).strftime('%y-%m-%d 00:00:00')
+      end_date = Time.parse(params[:end_date][0]).strftime('%y-%m-%d 23:59:00')
+
+      @mi_transactions = MiTransaction.where(:tran_date => start_date..end_date).paginate(:page => params[:page], :per_page => 15)
+    else
+      @mi_transactions = MiTransaction.paginate(:page => params[:page], :per_page => 15)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

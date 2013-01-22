@@ -1,0 +1,75 @@
+<% if params[:action] == 'download_transaction_pdf' %>
+  <table class="table table-bordered table-hover" border="1" cellspacing="0">
+<% else %>
+  <table class="table table-bordered table-hover">
+<% end %>
+
+  <tr>
+    <th>Tran date</th>
+    <th>Particulars</th>
+    <th>Credit</th>
+    <th>Debit</th>
+    <th>Balance</th>
+    
+  </tr>
+
+<% @mi_transactions.each do |mi_transaction| %>
+  <tr>
+    <td><%= mi_transaction.tran_date.strftime("%d-%m-%Y") %></td>
+    <td>
+     <% if !mi_transaction.monthly_interest_id.nil? %>
+          <%= link_to(mi_transaction.monthly_interest.loan_name) %>  <%= mi_transaction.particulars %>
+      <% elsif !mi_transaction.monthly_f_investment.nil? and !mi_transaction.monthly_f_investment.partner.nil? %>
+          PID -<%= link_to(mi_transaction.monthly_f_investment.partner.unique_id+' '+mi_transaction.monthly_f_investment.partner.first_name) %>  <%= mi_transaction.particulars %>
+      <% else %>
+          <%= mi_transaction.particulars %>
+      <% end %>
+    </td>
+    <td>Rs. <%= mi_transaction.debit %></td>
+    <td>Rs. <%= mi_transaction.credit %></td>
+    <td>Rs. <%= mi_transaction.balance %></td>
+  </tr>
+<% end %>
+
+<!-- -------------- -->
+<tr>
+  <td> </td>
+  <td><label class="note-bal">
+        <strong>TRANSACTION TOTAL</strong> 
+      </label>
+  </td>
+  <td>
+    <label class="note-bal">
+      <strong> Rs. <%= @mi_transactions.map(&:debit).inject{|sum,x| sum.to_i + x.to_i} %> </strong>
+     </label>
+   </td>
+  <td>
+    <label class="note-bal">
+    <strong> Rs. <%= @mi_transactions.map(&:credit).inject{|sum,x| sum.to_i + x.to_i} %> </strong>
+    </label>
+  </td>
+  <td> </td>
+</tr>
+
+<!-- -------------- -->
+
+<tr>
+  <td> </td>
+  <td>
+    <label class="note-bal"> 
+      <strong>CLOSING BALANCE </strong> 
+    </label> 
+  </td>
+  <td> </td>
+  <td> </td>
+  <td>
+    <label class="note-bal">
+      <strong> Rs. <%= @mi_transactions.last.balance unless @mi_transactions.last.nil? %> </strong> 
+    </label>
+  </td>
+</tr>
+
+<!-- ---------------- -->
+</table>
+
+<br />

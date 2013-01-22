@@ -1,0 +1,11 @@
+<div class="filter-trans" style="padding:5px; border: 1px solid #e5e5e5; margin-bottom: 5px;">
+      <p style="margin: 5px 0px 0px 10px; color:brown; font-weight: bold; "> Select Date Range to filter Transactions: </p>
+      <form action = <%= form_action %>>
+        <%# CalendarDateSelect.format=(:iso_date )%>
+        <div class="label-field-pair">
+          <div class="text-input-bg"><%= calendar_date_select :start_date, "", :placeholder => 'From'%></div>
+          <div class="text-input-bg"><%= calendar_date_select :end_date, "", :placeholder => 'To' %></div>
+        </div>
+        <input type="submit" value="Filter" class="btn" style = "margin: 10px 10px 10px 10px;"/>
+      </form>
+    </div>

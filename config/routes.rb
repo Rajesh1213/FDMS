@@ -1,7 +1,7 @@
 FinacialDataManagementSystem::Application.routes.draw do
 
   get "rents/download_rent_full_details_pdf"
-  get "transactions/download_transaction_pdf"
+  get "transactions/download_transaction_pdf", "mi_transactions/download_transaction_pdf"
   get "monthly_finances/download_track_record_pdf"
   get "monthly_finances/list"
   get "daily_finances/list"

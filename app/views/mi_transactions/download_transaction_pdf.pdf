@@ -1,0 +1,3 @@
+<%= wicked_pdf_stylesheet_link_tag "pdf" %>
+
+<%= render :partial => "/mi_transactions/mi_transactions_list"%>

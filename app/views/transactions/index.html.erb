@@ -26,30 +26,31 @@
   <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
   <br/>
   <div class="box">
-    <div class="filter-trans" style="padding:5px; border: 1px solid #e5e5e5; margin-bottom: 5px;">
+    <!-- <div class="filter-trans" style="padding:5px; border: 1px solid #e5e5e5; margin-bottom: 5px;">
       <p style="margin: 5px 0px 0px 10px; color:brown; font-weight: bold; "> Select Date Range to filter Transactions: </p>
       <form action = "/transactions">
         <%# CalendarDateSelect.format=(:iso_date )%>
         <div class="label-field-pair">
-          <div class="text-input-bg"><%= calendar_date_select :start_date, "", :placeholder => 'From'%></div>
-          <div class="text-input-bg"><%= calendar_date_select :end_date, "", :placeholder => 'To' %></div>
+          # <div class="text-input-bg"><%#= calendar_date_select :start_date, "", :placeholder => 'From'%></div>
+          # <div class="text-input-bg"><%#= calendar_date_select :end_date, "", :placeholder => 'To' %></div>
         </div>
         <input type="submit" value="Filter" class="btn" style = "margin: 10px 10px 10px 10px;"/>
       </form>
+    </div> -->
+    <%= render :partial => "/shared_partials/date_range_filter" , :locals => {:form_action => "/transactions"}%>
+
+    <div class="total-invest-info">
+      <% if params.include? "start_date" and params.include? "end_date" %>
+        <a href="/transactions/download_transaction_pdf.pdf?start_date=<%= params[:start_date][0] %>&end_date=<%= params[:end_date][0] %>;" class="download-pdf", style ='margin-left: 15px;'> <%= image_tag 'pdf-icon.png', :size =>'15x15' %> Download Pdf Report</a>
+      <% else%>
+        <a href="/transactions/download_transaction_pdf.pdf" class="download-pdf", style ='margin:0px 10px 0px 10px;'><%= image_tag 'pdf-icon.png', :size =>'15x15' %> Download Pdf Report</a>
+      <% end %>
+
+      <!-- Closing Balance:<strong> Rs. <%= @total %>  /- </strong> -->
     </div>
-
-  <div class="total-invest-info">
-    <% if params.include? "start_date" and params.include? "end_date" %>
-      <a href="/transactions/download_transaction_pdf.pdf?start_date=<%= params[:start_date][0] %>&end_date=<%= params[:end_date][0] %>;" class="download-pdf", style ='margin-left: 15px;'> <%= image_tag 'pdf-icon.png', :size =>'15x15' %> Download Pdf Report</a>
-    <% else%>
-      <a href="/transactions/download_transaction_pdf.pdf" class="download-pdf", style ='margin:0px 10px 0px 10px;'><%= image_tag 'pdf-icon.png', :size =>'15x15' %> Download Pdf Report</a>
-    <% end %>
-
-    <!-- Closing Balance:<strong> Rs. <%= @total %>  /- </strong> -->
-  </div>
   
   <%= render :partial => "/transactions/transactions_list"%>
   
-</div>
+  </div>
 </div>
 <%= will_paginate @transactions %>

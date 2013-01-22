@@ -12,6 +12,7 @@
   border-right: 1px solid #ddd;
 }
 .note-bal{ font-size: 12px; letter-spacing: 1px;  }
+.download-pdf{font-weight: bold; text-decoration: underline; padding: 3px;}
 </style>
 <div id="content-header">
   <%= image_tag('users-icon.jpeg') %>
@@ -32,77 +33,19 @@
   <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
   <br/>
   <div class="box">
+    <%= render :partial => "/shared_partials/date_range_filter", :locals => {:form_action => "/mi_transactions"}%>
 
-<div class="total-invest-info">Closing Balance:<strong> Rs. <%= @total %>  /- </strong></div>
+    <div class="total-invest-info">
+      <% if params.include? "start_date" and params.include? "end_date" %>
+          <a href="/mi_transactions/download_transaction_pdf.pdf?start_date=<%= params[:start_date][0] %>&end_date=<%= params[:end_date][0] %>;" class="download-pdf", style ='margin-left: 15px;'> <%= image_tag 'pdf-icon.png', :size =>'15x15' %> Download Pdf Report</a>
+        <% else%>
+          <a href="/mi_transactions/download_transaction_pdf.pdf" class="download-pdf", style ='margin:0px 10px 0px 10px;'><%= image_tag 'pdf-icon.png', :size =>'15x15' %> Download Pdf Report</a>
+        <% end %>
 
-<table class="table table-bordered">
-  <tr>
-    <th>Tran date</th>
-    <th>Particulars</th>
-    <th>Credit</th>
-    <th>Debit</th>
-    <th>Balance</th>
-    
-  </tr>
-
-<% @mi_transactions.each do |mi_transaction| %>
-  <tr>
-    <td><%= mi_transaction.tran_date.strftime("%d-%m-%Y") %></td>
-    <td>
-     <% if !mi_transaction.monthly_interest_id.nil? %>
-          <%= link_to(mi_transaction.monthly_interest.loan_name) %>  <%= mi_transaction.particulars %>
-      <% elsif !mi_transaction.monthly_f_investment.nil? and !mi_transaction.monthly_f_investment.partner.nil? %>
-          PID -<%= link_to(mi_transaction.monthly_f_investment.partner.unique_id+' '+mi_transaction.monthly_f_investment.partner.first_name) %>  <%= mi_transaction.particulars %>
-      <% else %>
-          <%= mi_transaction.particulars %>
-      <% end %>
-    </td>
-    <td>Rs. <%= mi_transaction.debit %></td>
-    <td>Rs. <%= mi_transaction.credit %></td>
-    <td>Rs. <%= mi_transaction.balance %></td>
-  </tr>
-<% end %>
-
-<!-- -------------- -->
-<tr>
-  <td> </td>
-  <td><label class="note-bal">
-        <strong>TRANSACTION TOTAL</strong> 
-      </label>
-  </td>
-  <td>
-    <label class="note-bal">
-      <strong> Rs. <%= @mi_transactions.map(&:debit).inject{|sum,x| sum.to_i + x.to_i} %> </strong>
-     </label>
-   </td>
-  <td>
-    <label class="note-bal">
-    <strong> Rs. <%= @mi_transactions.map(&:credit).inject{|sum,x| sum.to_i + x.to_i} %> </strong>
-    </label>
-  </td>
-  <td> </td>
-</tr>
-
-<!-- -------------- -->
-
-<tr>
-  <td> </td>
-  <td>
-    <label class="note-bal"> 
-      <strong>CLOSING BALANCE </strong> 
-    </label> 
-  </td>
-  <td> </td>
-  <td> </td>
-  <td>
-    <label class="note-bal">
-      <strong> Rs. <%= @mi_transactions.last.balance unless @mi_transactions.last.nil? %> </strong> 
-    </label>
-  </td>
-</tr>
-
-<!-- ---------------- -->
-</table>
-
-<br />
-
+      Closing Balance:<strong> Rs. <%= @total %>  /- </strong>
+    </div>
+      
+    <%= render :partial => "/mi_transactions/mi_transactions_list"%>
+  </div>
+</div>
+<%= will_paginate @mitransactions %>

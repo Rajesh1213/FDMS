@@ -2,7 +2,7 @@
 / t is investmet Type
 -t = investment_type
 / i is investment total amount
--i = p.monthly_f_investments.where("invested_in = '#{t}'").map(&:investment_amount).inject{|sum,x| sum.to_i + x.to_i}
+-i = p.monthly_f_investments.where("invested_in = '#{t}' and is_deleted = 0").map(&:investment_amount).inject{|sum,x| sum.to_i + x.to_i}
 / returns total invested amount in investment type
 Rs.
 - unless i.nil?

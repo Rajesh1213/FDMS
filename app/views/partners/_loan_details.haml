@@ -1,6 +1,6 @@
 %style
 	:plain
-		.loan_details {border-left: 1px solid #e5e5e5; padding: 5px; background-color: #f9f9f9; width: 220px; float: left; margin-left:7px; font-family: verdana; font-size: 12px;}
+		.loan_details {border-left: 1px solid #e5e5e5; padding: 5px; background-color: #f9f9f9; width: 220px; float: left; margin-left:7px; font-family: verdana; font-size: 13px;}
 		.heading { margin:5px; border:1px solid #e5e5e5; padding: 5px; background-color: #efefef}
 
 %div{ :style => 'margin-left: 5px;'}
@@ -29,15 +29,15 @@
 
 .heading
 	.loan_details
-		Daily Finance :
+		%strong DF:
 		=link_to "#{@df_loans} Lns"
 	.loan_details
-		Monthly Finance :
+		%strong MF:
 		=link_to "#{@mf_loans} Lns"
 	.loan_details
-		Daily Interest :
+		%strong DI:
 		=link_to "0 Lns"
 	.loan_details
-		Monthly Interest :
+		%strong MI:
 		=link_to "0 Lns"
 	.clearfix

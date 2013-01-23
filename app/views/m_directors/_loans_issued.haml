@@ -1,6 +1,6 @@
 -partner = Partner.find(pid)
--mf_loans = MonthlyFinance.find_all_by_partner_id(pid).count
--df_loans = DailyFinance.find_all_by_partner_id(pid).count
+-mf_loans = partner.monthly_finances.count
+-df_loans = partner.daily_finances.count
 -loans_issued = mf_loans + df_loans
 
 %strong

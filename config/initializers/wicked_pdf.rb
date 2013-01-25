@@ -16,6 +16,8 @@ end
 require 'wicked_pdf_railtie'
 require 'wicked_pdf_tempfile'
 
+WickedPdf.config = { :exe_path => "/usr/local/bin/wkhtmltopdf" }
+
 class WickedPdf
   EXE_NAME = "wkhtmltopdf"
   @@config = {}

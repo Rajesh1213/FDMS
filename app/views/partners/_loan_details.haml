@@ -1,24 +1,43 @@
 %style
 	:plain
-		.loan_details {border-left: 1px solid #e5e5e5; padding: 5px; background-color: #f9f9f9; width: 220px; float: left; margin-left:7px; font-family: verdana; font size: 11px;}
-		.heading
+		.loan_details {border-left: 1px solid #e5e5e5; padding: 5px; background-color: #f9f9f9; width: 220px; float: left; margin-left:7px; font-family: verdana; font-size: 13px;}
+		.heading { margin:5px; border:1px solid #e5e5e5; padding: 5px; background-color: #efefef}
 
-.heading{ :style => "margin:5px; border:1px solid #e5e5e5; padding: 5px; background-color: #efefef" }
+%div{ :style => 'margin-left: 5px;'}
+	%p
+		%em DF = Daily Finance,
+		%em MF = Monthly Finance,
+		%em DI = Daily Interest,
+		%em MI = Monthly Interest
+	%p
+		%em Lns = Loans
 
-	.loan_details 
-		Daily Finance : 
-		=link_to "#{@mf_loans} L"
-
+.heading
 	.loan_details
-		Monthly Finance :
-		=link_to "#{@df_loans} L"
-
+		%strong T Invst, DF:
+		= render :partial => "/partners/investment_details", :locals => {:partner => @partner, :investment_type => "daily_finance"}
 	.loan_details
-		Daily Interest :
-		=link_to "0 L"
-
+		%strong T Invst., MF:
+		= render :partial => "/partners/investment_details", :locals => {:partner => @partner, :investment_type => "monthly_finance"}
 	.loan_details
-		Monthly Interest :
-		=link_to "0 L"
+		%strong T Invst, DI:
+		= render :partial => "/partners/investment_details", :locals => {:partner => @partner, :investment_type => "daily_interest"}
+	.loan_details
+		%strong T invst, MI:
+		= render :partial => "/partners/investment_details", :locals => {:partner => @partner, :investment_type => "monthly_interest"}
+	.clearfix
 
+.heading
+	.loan_details
+		%strong DF:
+		=link_to "#{@df_loans} Lns"
+	.loan_details
+		%strong MF:
+		=link_to "#{@mf_loans} Lns"
+	.loan_details
+		%strong DI:
+		=link_to "0 Lns"
+	.loan_details
+		%strong MI:
+		=link_to "0 Lns"
 	.clearfix

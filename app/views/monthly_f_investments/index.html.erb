@@ -64,7 +64,7 @@
     </td>
     
     <td>Rs. <%= monthly_f_investment.investment_amount %></td>
-    <td> <strong> <%= monthly_f_investment.invested_in %> </strong> </td>
+    <td> <strong> <%= monthly_f_investment.invested_in.camelize %> </strong> </td>
     
     <td><%= link_to 'Edit', edit_monthly_f_investment_path(monthly_f_investment) %></td>
     <td><%= link_to 'Destroy', monthly_f_investment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

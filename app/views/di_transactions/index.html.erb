@@ -1,17 +1,9 @@
 <style>
 .table td, .table tr { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;}
-.total-invest-info{
-  /*background-color: red;*/
-  text-align: right;
-  padding:8px 50px 8px 0px ;
-  font-size: 14px;
-  margin: 0px;
-  background-color: #f9f9f9;
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-}
-.note-bal{ font-size: 12px; letter-spacing: 1px;  }
+.total-invest-info{text-align: right;padding:8px 50px 8px 0px ;font-size: 14px;margin: 0px;background-color: #f9f9f9;border-top: 1px solid #ddd;border-left: 1px solid #ddd;border-right: 1px solid #ddd;}
+.total-invest-info a{text-align:left;float: left;}
+.note-bal{ font-size: 12px; letter-spacing: 1px; }
+.download-pdf{font-weight: bold; text-decoration: underline; padding: 3px;}
 </style>
 <div id="content-header">
   <%= image_tag('users-icon.jpeg') %>
@@ -32,77 +24,19 @@
   <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
   <br/>
   <div class="box">
+    <%= render :partial => "/shared_partials/date_range_filter", :locals => {:form_action => "/di_transactions"}%>
 
-<div class="total-invest-info">Closing Balance:<strong> Rs. <%= @total %>  /- </strong></div>
+    <div class="total-invest-info">
+      <% if params.include? "start_date" and params.include? "end_date" %>
+          <a href="/di_transactions/download_transaction_pdf.pdf?start_date=<%= params[:start_date][0] %>&end_date=<%= params[:end_date][0] %>;" class="download-pdf", style ='margin-left: 15px;'> <%= image_tag 'pdf-icon.png', :size =>'15x15' %> Download Pdf Report</a>
+        <% else%>
+          <a href="/di_transactions/download_transaction_pdf.pdf" class="download-pdf", style ='margin:0px 10px 0px 10px;'><%= image_tag 'pdf-icon.png', :size =>'15x15' %> Download Pdf Report</a>
+        <% end %>
 
-<table class="table table-bordered">
-  <tr>
-    <th>Tran date</th>
-    <th>Particulars</th>
-    <th>Credit</th>
-    <th>Debit</th>
-    <th>Balance</th>
-  </tr>
+      Closing Balance:<strong> Rs. <%= @total %>  /- </strong>
+    </div>
 
-<% @di_transactions.each do |di_transaction| %>
-  <tr>
-    <td><%= di_transaction.tran_date.strftime("%d-%m-%Y") %></td>
-    <td>
-       <% if !di_transaction.dailyinterest_id.nil? %>
-          <%= link_to(di_transaction.dailyinterest.loan_name) %>  <%= di_transaction.particulars %>
-      <% elsif !di_transaction.monthly_f_investment.nil? and !di_transaction.monthly_f_investment.partner.nil? %>
-          PID -<%= link_to(di_transaction.monthly_f_investment.partner.unique_id+' '+di_transaction.monthly_f_investment.partner.first_name) %>  <%= di_transaction.particulars %>
-      <% else %>
-          <%= di_transaction.particulars %>
-      <% end %>
-    </td>
-    <td><%= di_transaction.debit %></td>
-    <td><%= di_transaction.credit %></td>
-    <td><%= di_transaction.balance %></td>
-  </tr>
-<% end %>
-
-<!-- -------------- -->
-<tr>
-  <td> </td>
-  <td><label class="note-bal">
-        <strong>TRANSACTION TOTAL</strong> 
-      </label>
-  </td>
-  <td>
-    <label class="note-bal">
-      <strong> Rs. <%= @di_transactions.map(&:debit).inject{|sum,x| sum.to_i + x.to_i} %> </strong>
-     </label>
-   </td>
-  <td>
-    <label class="note-bal">
-    <strong> Rs. <%= @di_transactions.map(&:credit).inject{|sum,x| sum.to_i + x.to_i} %> </strong>
-    </label>
-  </td>
-  <td> </td>
-</tr>
-
-<!-- -------------- -->
-
-<tr>
-  <td> </td>
-  <td>
-    <label class="note-bal"> 
-      <strong>CLOSING BALANCE </strong> 
-    </label> 
-  </td>
-  <td> </td>
-  <td> </td>
-  <td>
-    <label class="note-bal">
-      <strong> Rs. <%= @di_transactions.last.balance unless @di_transactions.last.nil? %> </strong> 
-    </label>
-  </td>
-</tr>
-
-<!-- ---------------- -->
-</table>
-
-</div>
+    <%= render :partial => "/di_transactions/di_transactions_list"%>
+  </div>
 </div>
 

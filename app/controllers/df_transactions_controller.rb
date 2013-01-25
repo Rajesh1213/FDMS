@@ -1,9 +1,35 @@
 class DfTransactionsController < ApplicationController
   before_filter :authenticate_user! 
+
+  def download_transaction_pdf
+    if params.include? "start_date" and params.include? "end_date" and !params["start_date"][0].blank? and !params["end_date"][0].blank? 
+      start_date = Time.parse(params[:start_date]).strftime('%y-%m-%d 00:00:00')
+      end_date = Time.parse(params[:end_date]).strftime('%y-%m-%d 23:59:00')
+
+      @df_transactions = DfTransaction.where(:tran_date => start_date..end_date).paginate(:page => params[:page], :per_page => 15)
+    else
+      @df_transactions = DfTransaction.paginate(:page => params[:page], :per_page => 15)
+    end
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => "Daily Finance Transactions-#{Time.now}"
+      end
+    end
+  end
+
   # GET /df_transactions
   # GET /df_transactions.json
   def index
-    @df_transactions = DfTransaction.all
+    if params.include? "start_date" and params.include? "end_date" and !params["start_date"][0].blank? and !params["end_date"][0].blank? 
+      start_date = Time.parse(params[:start_date][0]).strftime('%y-%m-%d 00:00:00')
+      end_date = Time.parse(params[:end_date][0]).strftime('%y-%m-%d 23:59:00')
+
+      @df_transactions = DfTransaction.where(:tran_date => start_date..end_date).paginate(:page => params[:page], :per_page => 15)
+    else
+      @df_transactions = DfTransaction.paginate(:page => params[:page], :per_page => 15)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

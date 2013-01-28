@@ -29,7 +29,7 @@
           <div id="header_link" >
           <% if user_signed_in? %>
             Signed in as <%= current_user.email %>. Not you?
-            <%= link_to "Sign out", logout_path %>
+            <%= link_to "Sign out", logout_path, :class => "btn btn-mini"%>
           <% else %>
             Date: <%= Date.today.strftime("%d, %B  %Y") %> 
           <% end %>
